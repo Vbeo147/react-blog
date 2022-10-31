@@ -2,23 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { legacy_createStore as createStore } from "redux";
+import { combineReducers, legacy_createStore as createStore } from "redux";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import App from "./App";
-import { rootReducer } from "./ducks/reducers";
-import { ReactReduxFirebaseProvider } from "react-redux-firebase";
-import { createFirebaseInstance } from "react-redux-firebase";
+import App from "./components/App";
+import {
+  firebaseReducer,
+  ReactReduxFirebaseProvider,
+} from "react-redux-firebase";
+import { firestoreReducer, createFirestoreInstance } from "redux-firestore";
 
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+const fbConfig = {
+  apiKey: "AIzaSyAkfoVPY7KHRfTONsgCSeoWDk4DisytmY0",
+  authDomain: "blog-4cd65.firebaseapp.com",
+  projectId: "blog-4cd65",
+  storageBucket: "blog-4cd65.appspot.com",
+  messagingSenderId: "801967607293",
+  appId: "1:801967607293:web:74aa1468b705af0f885d94",
+  measurementId: "G-MTC5L9T9ST",
 };
 
 const rrfConfig = {
@@ -26,8 +28,13 @@ const rrfConfig = {
   useFirestoreForProfile: true,
 };
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(fbConfig);
 firebase.firestore();
+
+const rootReducer = combineReducers({
+  firebase: firebaseReducer,
+  firestore: firestoreReducer,
+});
 
 const initialState = {};
 const store = createStore(rootReducer, initialState);
@@ -36,7 +43,7 @@ const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
-  createFirebaseInstance,
+  createFirestoreInstance,
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
