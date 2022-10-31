@@ -19,9 +19,10 @@ function Menu() {
         {isLoaded(auth) && !isEmpty(auth) ? (
           <>
             <div>
-              {auth.displayName}
-              <br />
-              <button onClick={onLogOut}>Log Out</button>
+              <div>{auth.displayName}</div>
+              <div>
+                <button onClick={onLogOut}>Log Out</button>
+              </div>
             </div>
           </>
         ) : (
