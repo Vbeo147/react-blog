@@ -14,22 +14,39 @@ function Menu() {
     firebase.logout();
   };
   return (
-    <div>
-      <div>
-        {isLoaded(auth) && !isEmpty(auth) ? (
-          <>
-            <div>
-              <div>{auth.displayName}</div>
+    <>
+      <div
+        style={{
+          width: "100%",
+          height: "80px",
+          border: "1px solid black",
+        }}
+      >
+        <div>
+          {isLoaded(auth) && !isEmpty(auth) ? (
+            <>
               <div>
-                <button onClick={onLogOut}>Log Out</button>
+                <img
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "10px",
+                  }}
+                  src={auth.photoURL}
+                  alt=""
+                />
+                <span>{auth.displayName}</span>
+                <div>
+                  <button onClick={onLogOut}>Log Out</button>
+                </div>
               </div>
-            </div>
-          </>
-        ) : (
-          <button onClick={onLogIn}>Log In</button>
-        )}
+            </>
+          ) : (
+            <button onClick={onLogIn}>Log In</button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
