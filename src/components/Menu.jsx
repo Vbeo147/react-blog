@@ -1,5 +1,6 @@
 import { useFirebase, isLoaded, isEmpty } from "react-redux-firebase";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Menu() {
   const firebase = useFirebase();
@@ -13,6 +14,7 @@ function Menu() {
   const onLogOut = () => {
     firebase.logout();
   };
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -25,24 +27,21 @@ function Menu() {
         <div>
           {isLoaded(auth) && !isEmpty(auth) ? (
             <>
-              <div>
-                <img
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "10px",
-                  }}
-                  src={auth.photoURL}
-                  alt=""
-                />
-                <span>{auth.displayName}</span>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                }}
+              >
                 <div>
-                  <button onClick={onLogOut}>Log Out</button>
+                  <div>{auth.displayName}</div>
+                  <div onClick={onLogOut}>Log Out</div>
                 </div>
+                <div onClick={() => navigate("/write")}>글쓰기</div>
               </div>
             </>
           ) : (
-            <button onClick={onLogIn}>Log In</button>
+            <div onClick={onLogIn}>Log In</div>
           )}
         </div>
       </div>

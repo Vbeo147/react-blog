@@ -21,7 +21,6 @@ function Home() {
             <div>
               <TagMenu />
             </div>
-            <div>Hello</div>
           </div>
         </div>
       ) : (
