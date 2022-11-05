@@ -1,5 +1,12 @@
+import { useState } from "react";
+import { useFirestore } from "react-redux-firebase";
+
 function TagMenu() {
-  const Tags = ["ReactJS", "Firebase"];
+  const [tag, setTag] = useState("");
+  const firestore = useFirestore();
+  const onChange = (e) => {
+    setTag(e.target.value);
+  };
   return (
     <div
       style={{
@@ -8,9 +15,21 @@ function TagMenu() {
         border: "1px solid black",
       }}
     >
-      {Tags.map((item, index) => (
-        <div key={index}>{item}</div>
-      ))}
+      <div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            firestore.collection("tags").add({ tag });
+          }}
+        >
+          <input
+            onChange={onChange}
+            type="text"
+            placeholder="추가할 태그를 입력해주세요"
+          />
+          <button type="submit">+</button>
+        </form>
+      </div>
     </div>
   );
 }
