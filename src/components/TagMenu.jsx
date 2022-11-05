@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 
@@ -36,8 +36,17 @@ function TagMenu() {
       </div>
       <ul>
         {tagSelector &&
-          Object.values(tagSelector).map((item, index) => (
-            <li key={index}>{item.tag}</li>
+          Object.keys(tagSelector).map((item, index) => (
+            <li key={index}>
+              {tagSelector[item].tag}
+              <button
+                onClick={() => {
+                  firestore.doc(`tags/${item}`).delete();
+                }}
+              >
+                X
+              </button>
+            </li>
           ))}
       </ul>
     </div>

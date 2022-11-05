@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 function WritePage() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [select, setSelect] = useState("");
   const navigate = useNavigate();
   const firestore = useFirestore();
   useFirestoreConnect({
@@ -22,7 +23,7 @@ function WritePage() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    firestore.collection("test").add({
+    firestore.doc(`tags/${select}`).add({
       title: title,
       text: text,
     });
