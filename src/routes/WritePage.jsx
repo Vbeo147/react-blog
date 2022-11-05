@@ -2,13 +2,18 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useFirestore } from "react-redux-firebase";
+import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { useSelector } from "react-redux";
 
 function WritePage() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const navigate = useNavigate();
   const firestore = useFirestore();
+  useFirestoreConnect({
+    collection: "tags",
+  });
+  const tagSelector = useSelector((state) => state.firestore.data.tags);
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -26,12 +31,20 @@ function WritePage() {
     <div>
       <form onSubmit={onSubmit}>
         <div>
-          <input
-            onChange={onTitleChange}
-            type="text"
-            placeholder="제목"
-            required
-          />
+          <div>
+            <input
+              onChange={onTitleChange}
+              type="text"
+              placeholder="제목"
+              required
+            />
+            <select>
+              {tagSelector &&
+                Object.values(tagSelector).map((item, index) => (
+                  <option key={index}>{item.tag}</option>
+                ))}
+            </select>
+          </div>
           <CKEditor
             editor={ClassicEditor}
             data=""
