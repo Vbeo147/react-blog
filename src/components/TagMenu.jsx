@@ -15,6 +15,7 @@ function TagMenu() {
   const onSubmit = (e) => {
     e.preventDefault();
     firestore.collection("tags").add({ tag });
+    setTag("");
   };
   return (
     <div
@@ -28,6 +29,7 @@ function TagMenu() {
         <form onSubmit={onSubmit}>
           <input
             onChange={onChange}
+            value={tag}
             type="text"
             placeholder="추가할 태그를 입력해주세요"
           />
@@ -36,18 +38,22 @@ function TagMenu() {
       </div>
       <ul>
         {tagSelector &&
-          Object.keys(tagSelector).map((item, index) => (
-            <li key={index}>
-              {tagSelector[item].tag}
-              <button
-                onClick={() => {
-                  firestore.doc(`tags/${item}`).delete();
-                }}
-              >
-                X
-              </button>
-            </li>
-          ))}
+          Object.keys(tagSelector)
+            .filter((item) => tagSelector[item]?.tag !== (null || undefined))
+            .map((item, index) => {
+              return (
+                <li key={index}>
+                  {tagSelector[item]?.tag}
+                  <button
+                    onClick={() => {
+                      firestore.doc(`tags/${item}`).delete();
+                    }}
+                  >
+                    X
+                  </button>
+                </li>
+              );
+            })}
       </ul>
     </div>
   );
