@@ -7,8 +7,10 @@ import {
 } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import ImageResize from "quill-image-resize";
+Quill.register("modules/ImageResize", ImageResize);
 
 function WritePage() {
   const [title, setTitle] = useState("");
@@ -93,6 +95,9 @@ function WritePage() {
         handlers: {
           image: imageHandler,
         },
+      },
+      ImageResize: {
+        parchment: Quill.import("parchment"),
       },
     };
   }, []);

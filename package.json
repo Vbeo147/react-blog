@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "firebase": "^9.13.0",
+    "quill-image-resize": "^3.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",
