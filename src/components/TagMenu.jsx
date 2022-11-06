@@ -14,7 +14,9 @@ function TagMenu() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    firestore.collection("tags").add({ tag });
+    firestore.collection("tags").doc(tag).set({
+      CheckUndefined: "",
+    });
     setTag("");
   };
   return (
@@ -32,6 +34,7 @@ function TagMenu() {
             value={tag}
             type="text"
             placeholder="추가할 태그를 입력해주세요"
+            required
           />
           <button type="submit">+</button>
         </form>
@@ -39,11 +42,13 @@ function TagMenu() {
       <ul>
         {tagSelector &&
           Object.keys(tagSelector)
-            .filter((item) => tagSelector[item]?.tag !== (null || undefined))
+            .filter((item) => {
+              return tagSelector[item]?.CheckUndefined !== (null || undefined);
+            })
             .map((item, index) => {
               return (
                 <li key={index}>
-                  {tagSelector[item]?.tag}
+                  {item}
                   <button
                     onClick={() => {
                       firestore.doc(`tags/${item}`).delete();

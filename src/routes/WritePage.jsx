@@ -41,9 +41,12 @@ function WritePage() {
             />
             <select>
               {tagSelector &&
-                Object.values(tagSelector).map((item, index) => (
-                  <option key={index}>{item.tag}</option>
-                ))}
+                Object.keys(tagSelector)
+                  .filter(
+                    (item) =>
+                      tagSelector[item]?.CheckUndefined !== (null || undefined)
+                  )
+                  .map((item, index) => <option key={index}>{item}</option>)}
             </select>
           </div>
           <CKEditor
