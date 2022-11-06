@@ -21,12 +21,17 @@ function WritePage() {
   const onTextChange = (data) => {
     setText(data);
   };
-  const onSubmit = (e) => {
+  const onSelectChange = (e) => {
+    setSelect(e.target.value);
+  };
+  const onSubmit = async (e) => {
     e.preventDefault();
-    firestore.doc(`tags/${select}`).add({
-      title: title,
-      text: text,
+    await firestore.collection("write").add({
+      tagName: select,
+      info: { title, text },
     });
+    setTitle("");
+    setText("");
   };
   return (
     <div>
@@ -35,11 +40,12 @@ function WritePage() {
           <div>
             <input
               onChange={onTitleChange}
+              value={title || ""}
               type="text"
               placeholder="제목"
               required
             />
-            <select>
+            <select onChange={onSelectChange}>
               {tagSelector &&
                 Object.keys(tagSelector)
                   .filter(
@@ -51,7 +57,7 @@ function WritePage() {
           </div>
           <CKEditor
             editor={ClassicEditor}
-            data=""
+            data={text || ""}
             config={{
               placeholder: "내용을 입력하세요",
               toolbar: ["bold", "italic"],
