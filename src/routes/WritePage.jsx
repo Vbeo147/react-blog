@@ -46,6 +46,7 @@ function WritePage() {
               required
             />
             <select onChange={onSelectChange}>
+              <option>태그를 선택해주세요</option>
               {tagSelector &&
                 Object.keys(tagSelector)
                   .filter(

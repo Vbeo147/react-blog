@@ -5,10 +5,9 @@ import { useSelector } from "react-redux";
 function TagMenu() {
   const [tag, setTag] = useState("");
   const firestore = useFirestore();
-  useFirestoreConnect({
-    collection: "tags",
-  });
+  useFirestoreConnect(["tags", "write"]);
   const tagSelector = useSelector((state) => state.firestore.data.tags);
+  const writeSelector = useSelector((state) => state.firestore.data.write);
   const onChange = (e) => {
     setTag(e.target.value);
   };
@@ -39,7 +38,7 @@ function TagMenu() {
           <button type="submit">+</button>
         </form>
       </div>
-      <ul>
+      <div>
         {tagSelector &&
           Object.keys(tagSelector)
             .filter((item) => {
@@ -47,19 +46,34 @@ function TagMenu() {
             })
             .map((item, index) => {
               return (
-                <li key={index}>
+                <ul key={index}>
                   {item}
                   <button
-                    onClick={() => {
-                      firestore.doc(`tags/${item}`).delete();
-                    }}
+                    onClick={() => firestore.doc(`tags/${item}`).delete()}
                   >
                     X
                   </button>
-                </li>
+                  {writeSelector &&
+                    Object.keys(writeSelector)
+                      .filter((key) => writeSelector[key]?.tagName === item)
+                      .map((info, index) => {
+                        return (
+                          <li key={index}>
+                            {writeSelector[info].info.title}
+                            <button
+                              onClick={() =>
+                                firestore.doc(`write/${info}`).delete()
+                              }
+                            >
+                              X
+                            </button>
+                          </li>
+                        );
+                      })}
+                </ul>
               );
             })}
-      </ul>
+      </div>
     </div>
   );
 }
