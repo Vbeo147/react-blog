@@ -41,6 +41,7 @@ function WritePage() {
     });
     setTitle("");
     setText("");
+    navigate(-1);
   };
   const readFileAsync = (file) => {
     return new Promise((resolve, reject) => {
