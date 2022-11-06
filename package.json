@@ -17,7 +17,8 @@
     "react-redux-firebase": "^3.11.0",
     "react-router-dom": "^6.4.3",
     "redux": "^4.2.0",
-    "redux-firestore": "^1.0.0"
+    "redux-firestore": "^1.0.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.22",

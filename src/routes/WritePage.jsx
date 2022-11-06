@@ -1,7 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { useState, useMemo, useRef } from "react";
+import {
+  useFirebase,
+  useFirestore,
+  useFirestoreConnect,
+} from "react-redux-firebase";
 import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -9,8 +14,10 @@ function WritePage() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [select, setSelect] = useState("");
+  const quillRef = useRef();
   const navigate = useNavigate();
   const firestore = useFirestore();
+  const firebase = useFirebase();
   useFirestoreConnect({
     collection: "tags",
   });
@@ -33,17 +40,62 @@ function WritePage() {
     setTitle("");
     setText("");
   };
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ indent: "-1" }, { indent: "+1" }],
-      ["link", "image"],
-      [{ color: [] }, { background: [] }],
-      ["clean"],
-    ],
-  };
+  const readFileAsync = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+
+      reader.onerror = reject;
+
+      reader.readAsDataURL(file);
+    });
+  };
+  const imageHandler = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+    input.addEventListener("change", async () => {
+      const file = input.files[0];
+      async function processFile() {
+        try {
+          const Url = await readFileAsync(file);
+          // firebase storage putString and getDownloadURL - very inefficient :(
+          let storageUrl = "";
+          const storageRef = firebase.storage().ref().child(uuidv4());
+          const response = await storageRef.putString(Url, "data_url");
+          storageUrl = await response.ref.getDownloadURL();
+          // editor set image
+          const editor = quillRef.current.getEditor();
+          const range = editor.getSelection();
+          editor.insertEmbed(range.index, "image", storageUrl);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      processFile();
+    });
+  };
+  const modules = useMemo(() => {
+    return {
+      toolbar: {
+        container: [
+          [{ header: [1, 2, false] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ indent: "-1" }, { indent: "+1" }],
+          ["link", "image"],
+          [{ color: [] }, { background: [] }],
+          ["clean"],
+        ],
+        handlers: {
+          image: imageHandler,
+        },
+      },
+    };
+  }, []);
   const formats = [
     "header",
     "bold",
@@ -70,8 +122,8 @@ function WritePage() {
               placeholder="제목"
               required
             />
-            <select onChange={onSelectChange}>
-              <option>태그를 선택해주세요</option>
+            <select onChange={onSelectChange} required>
+              <option value="">태그를 선택해주세요</option>
               {tagSelector &&
                 Object.keys(tagSelector)
                   .filter(
@@ -83,6 +135,7 @@ function WritePage() {
           </div>
           <ReactQuill
             theme="snow"
+            ref={quillRef}
             modules={modules}
             formats={formats}
             value={text || ""}

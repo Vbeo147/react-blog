@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import "firebase/compat/storage";
 import { firebaseReducer } from "react-redux-firebase";
 import { firestoreReducer } from "redux-firestore";
 import { combineReducers } from "redux";
@@ -17,6 +18,7 @@ const fbConfig = {
 
 firebase.initializeApp(fbConfig);
 firebase.firestore();
+firebase.storage();
 
 export const rootReducer = combineReducers({
   firebase: firebaseReducer,
