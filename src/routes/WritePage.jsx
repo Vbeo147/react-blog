@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function WritePage() {
   const [title, setTitle] = useState("");
@@ -33,6 +33,31 @@ function WritePage() {
     setTitle("");
     setText("");
   };
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [{ indent: "-1" }, { indent: "+1" }],
+      ["link", "image"],
+      [{ color: [] }, { background: [] }],
+      ["clean"],
+    ],
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "color",
+    "background",
+  ];
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -56,17 +81,14 @@ function WritePage() {
                   .map((item, index) => <option key={index}>{item}</option>)}
             </select>
           </div>
-          <CKEditor
-            editor={ClassicEditor}
-            data={text || ""}
-            config={{
-              placeholder: "내용을 입력하세요",
-              toolbar: ["bold", "italic"],
-            }}
-            onChange={(_, editor) => {
-              const data = editor.getData();
-              onTextChange(data);
-            }}
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            value={text || ""}
+            onChange={(content, delta, source, editor) =>
+              onTextChange(editor.getHTML())
+            }
           />
         </div>
         <div>
