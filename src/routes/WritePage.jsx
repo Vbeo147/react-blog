@@ -16,6 +16,7 @@ Quill.register("modules/ImageResize", ImageResize);
 function WritePage() {
   const [value, setValue] = useState({ title: "", select: "" });
   const [quill, setQuill] = useState("");
+  const [loading, setLoading] = useState(false);
   const { title, select } = value;
   const titleRef = useRef();
   const selectRef = useRef();
@@ -38,6 +39,7 @@ function WritePage() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     await firestore.collection("write").add({
       tagName: select,
       info: { title, text: quill },
@@ -46,6 +48,7 @@ function WritePage() {
       title: "",
       select: "",
     });
+    setLoading(false);
     navigate(-1);
   };
   const readFileAsync = (file) => {
@@ -157,7 +160,9 @@ function WritePage() {
           />
         </div>
         <div>
-          <button type="submit">Enter</button>
+          <button type="submit" disabled={loading}>
+            Enter
+          </button>
           <button onClick={() => navigate(-1)}>Close</button>
         </div>
       </form>
