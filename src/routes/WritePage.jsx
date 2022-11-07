@@ -25,9 +25,11 @@ function WritePage() {
   const firestore = useFirestore();
   const firebase = useFirebase();
   useFirestoreConnect({
-    collection: "tags",
+    collection: "categorys",
   });
-  const tagSelector = useSelector((state) => state.firestore.data.tags);
+  const categorySelector = useSelector(
+    (state) => state.firestore.data.categorys
+  );
   const onChange = () => {
     setValue({
       title: titleRef.current.value,
@@ -41,7 +43,7 @@ function WritePage() {
     e.preventDefault();
     setLoading(true);
     await firestore.collection("write").add({
-      tagName: select,
+      categoryName: select,
       info: { title, text: quill },
     });
     setValue({
@@ -139,11 +141,12 @@ function WritePage() {
             />
             <select onChange={onChange} required ref={selectRef}>
               <option value="">태그를 선택해주세요</option>
-              {tagSelector &&
-                Object.keys(tagSelector)
+              {categorySelector &&
+                Object.keys(categorySelector)
                   .filter(
                     (item) =>
-                      tagSelector[item]?.CheckUndefined !== (null || undefined)
+                      categorySelector[item]?.CheckUndefined !==
+                      (null || undefined)
                   )
                   .map((item, index) => <option key={index}>{item}</option>)}
             </select>

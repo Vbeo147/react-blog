@@ -3,20 +3,22 @@ import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 
 function Category() {
-  const [tag, setTag] = useState("");
+  const [category, setCategory] = useState("");
   const firestore = useFirestore();
-  useFirestoreConnect(["tags", "write"]);
-  const tagSelector = useSelector((state) => state.firestore.data.tags);
+  useFirestoreConnect(["categorys", "write"]);
+  const categorySelector = useSelector(
+    (state) => state.firestore.data.categorys
+  );
   const writeSelector = useSelector((state) => state.firestore.data.write);
   const onChange = (e) => {
-    setTag(e.target.value);
+    setCategory(e.target.value);
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    firestore.collection("tags").doc(tag).set({
+    firestore.collection("categorys").doc(category).set({
       CheckUndefined: "",
     });
-    setTag("");
+    setCategory("");
   };
   return (
     <div
@@ -30,7 +32,7 @@ function Category() {
         <form onSubmit={onSubmit}>
           <input
             onChange={onChange}
-            value={tag}
+            value={category}
             type="text"
             placeholder="추가할 태그를 입력해주세요"
             required
@@ -39,10 +41,12 @@ function Category() {
         </form>
       </div>
       <div>
-        {tagSelector &&
-          Object.keys(tagSelector)
+        {categorySelector &&
+          Object.keys(categorySelector)
             .filter((item) => {
-              return tagSelector[item]?.CheckUndefined !== (null || undefined);
+              return (
+                categorySelector[item]?.CheckUndefined !== (null || undefined)
+              );
             })
             .map((item, index) => {
               return (
@@ -55,7 +59,9 @@ function Category() {
                   </button>
                   {writeSelector &&
                     Object.keys(writeSelector)
-                      .filter((key) => writeSelector[key]?.tagName === item)
+                      .filter(
+                        (key) => writeSelector[key]?.categoryName === item
+                      )
                       .map((info, index) => {
                         return (
                           <li key={index}>
