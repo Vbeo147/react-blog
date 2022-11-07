@@ -10,12 +10,15 @@ import { v4 as uuidv4 } from "uuid";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ImageResize from "quill-image-resize";
+
 Quill.register("modules/ImageResize", ImageResize);
 
 function WritePage() {
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [select, setSelect] = useState("");
+  const [value, setValue] = useState({ title: "", select: "" });
+  const [quill, setQuill] = useState("");
+  const { title, select } = value;
+  const titleRef = useRef();
+  const selectRef = useRef();
   const quillRef = useRef();
   const navigate = useNavigate();
   const firestore = useFirestore();
@@ -24,23 +27,25 @@ function WritePage() {
     collection: "tags",
   });
   const tagSelector = useSelector((state) => state.firestore.data.tags);
-  const onTitleChange = (e) => {
-    setTitle(e.target.value);
+  const onChange = () => {
+    setValue({
+      title: titleRef.current.value,
+      select: selectRef.current.value,
+    });
   };
-  const onTextChange = (data) => {
-    setText(data);
-  };
-  const onSelectChange = (e) => {
-    setSelect(e.target.value);
+  const onQuillChange = (html) => {
+    setQuill(html);
   };
   const onSubmit = async (e) => {
     e.preventDefault();
     await firestore.collection("write").add({
       tagName: select,
-      info: { title, text },
+      info: { title, text: quill },
     });
-    setTitle("");
-    setText("");
+    setValue({
+      title: "",
+      select: "",
+    });
     navigate(-1);
   };
   const readFileAsync = (file) => {
@@ -122,13 +127,14 @@ function WritePage() {
         <div>
           <div>
             <input
-              onChange={onTitleChange}
+              onChange={onChange}
               value={title || ""}
               type="text"
               placeholder="제목"
               required
+              ref={titleRef}
             />
-            <select onChange={onSelectChange} required>
+            <select onChange={onChange} required ref={selectRef}>
               <option value="">태그를 선택해주세요</option>
               {tagSelector &&
                 Object.keys(tagSelector)
@@ -144,9 +150,9 @@ function WritePage() {
             ref={quillRef}
             modules={modules}
             formats={formats}
-            value={text || ""}
+            value={quill || ""}
             onChange={(content, delta, source, editor) =>
-              onTextChange(editor.getHTML())
+              onQuillChange(editor.getHTML())
             }
           />
         </div>

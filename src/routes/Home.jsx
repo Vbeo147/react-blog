@@ -1,7 +1,7 @@
 import { isLoaded } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import Menu from "../components/Menu";
-import TagMenu from "../components/TagMenu";
+import Category from "../components/Category";
 
 function Home() {
   const auth = useSelector((state) => state.firebase.auth);
@@ -19,7 +19,7 @@ function Home() {
             }}
           >
             <div>
-              <TagMenu />
+              <Category />
             </div>
           </div>
         </div>

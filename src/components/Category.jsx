@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 
-function TagMenu() {
+function Category() {
   const [tag, setTag] = useState("");
   const firestore = useFirestore();
   useFirestoreConnect(["tags", "write"]);
@@ -78,4 +78,4 @@ function TagMenu() {
   );
 }
 
-export default TagMenu;
+export default Category;
