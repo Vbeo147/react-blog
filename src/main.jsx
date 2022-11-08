@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { legacy_createStore as createStore } from "redux";
-import App from "./components/App";
+import HomePage from "./routes/HomePage";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
 import { rootReducer } from "./rootReducer";
@@ -29,7 +29,7 @@ root.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
       <BrowserRouter>
-        <App />
+        <HomePage />
       </BrowserRouter>
     </ReactReduxFirebaseProvider>
   </Provider>

@@ -2,8 +2,9 @@ import { isLoaded } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import Menu from "../components/Menu";
 import Category from "../components/Category";
+import AppRouter from "../components/AppRouter";
 
-function Home() {
+function HomePage() {
   const auth = useSelector((state) => state.firebase.auth);
   return (
     <>
@@ -21,6 +22,9 @@ function Home() {
             <div>
               <Category />
             </div>
+            <div>
+              <AppRouter />
+            </div>
           </div>
         </div>
       ) : (
@@ -30,4 +34,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;

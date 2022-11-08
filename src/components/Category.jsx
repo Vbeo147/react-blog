@@ -23,7 +23,7 @@ function Category() {
   return (
     <div
       style={{
-        width: "300px",
+        width: "280px",
         height: "100vh",
         border: "1px solid black",
       }}
