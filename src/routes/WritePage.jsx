@@ -142,8 +142,8 @@ function WritePage() {
               {categorySelector &&
                 Object.keys(categorySelector)
                   .filter(
-                    (item) =>
-                      categorySelector[item]?.CheckUndefined !==
+                    (categoryName) =>
+                      categorySelector[categoryName]?.CheckUndefined !==
                       (null || undefined)
                   )
                   .map((item, index) => <option key={index}>{item}</option>)}
