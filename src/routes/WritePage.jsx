@@ -24,9 +24,7 @@ function WritePage() {
   const navigate = useNavigate();
   const firestore = useFirestore();
   const firebase = useFirebase();
-  useFirestoreConnect({
-    collection: "categorys",
-  });
+  useFirestoreConnect(["categorys"]);
   const categorySelector = useSelector(
     (state) => state.firestore.data.categorys
   );

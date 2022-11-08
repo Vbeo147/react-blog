@@ -43,32 +43,36 @@ function Category() {
       <div>
         {categorySelector &&
           Object.keys(categorySelector)
-            .filter((item) => {
+            .filter((categoryName) => {
               return (
-                categorySelector[item]?.CheckUndefined !== (null || undefined)
+                categorySelector[categoryName]?.CheckUndefined !==
+                (null || undefined)
               );
             })
-            .map((item, index) => {
+            .map((ulCategoryName, index) => {
               return (
                 <ul key={index}>
-                  {item}
+                  {ulCategoryName}
                   <button
-                    onClick={() => firestore.doc(`tags/${item}`).delete()}
+                    onClick={() =>
+                      firestore.doc(`tags/${ulCategoryName}`).delete()
+                    }
                   >
                     X
                   </button>
                   {writeSelector &&
                     Object.keys(writeSelector)
                       .filter(
-                        (key) => writeSelector[key]?.categoryName === item
+                        (id) =>
+                          writeSelector[id]?.categoryName === ulCategoryName
                       )
-                      .map((info, index) => {
+                      .map((writeID, index) => {
                         return (
                           <li key={index}>
-                            {writeSelector[info].info.title}
+                            {writeSelector[writeID].info.title}
                             <button
                               onClick={() =>
-                                firestore.doc(`write/${info}`).delete()
+                                firestore.doc(`write/${writeID}`).delete()
                               }
                             >
                               X
