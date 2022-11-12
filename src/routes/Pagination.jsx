@@ -1,10 +1,11 @@
 import ReactPaginate from "react-paginate";
 import { useState, useEffect, useMemo } from "react";
-import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
+import CurrentList from "../components/CurrentList";
 
 function Pagination() {
-  const [currentItems, setCurrentItems] = useState(null);
+  const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   useFirestoreConnect(["write"]);
@@ -27,6 +28,7 @@ function Pagination() {
   };
   return (
     <>
+      <CurrentList currentItems={currentItems} />
       <div>
         <ReactPaginate
           breakLabel="..."
