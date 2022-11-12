@@ -24,7 +24,7 @@ function WritePage() {
   const navigate = useNavigate();
   const firestore = useFirestore();
   const firebase = useFirebase();
-  useFirestoreConnect(["categorys"]);
+  useFirestoreConnect(["categorys", "write"]);
   const categorySelector = useSelector(
     (state) => state.firestore.data.categorys
   );
@@ -42,6 +42,7 @@ function WritePage() {
     setLoading(true);
     await firestore.collection("write").add({
       categoryName: select,
+      createdAt: Date.now(),
       info: { title, text: quill },
     });
     setValue({
@@ -164,7 +165,9 @@ function WritePage() {
           <button type="submit" disabled={loading}>
             Enter
           </button>
-          <button onClick={() => navigate(-1)}>Close</button>
+          <button type="button" onClick={() => navigate("/")}>
+            Close
+          </button>
         </div>
       </form>
     </div>
