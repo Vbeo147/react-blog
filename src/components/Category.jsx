@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Category() {
   const [category, setCategory] = useState("");
+  const navigate = useNavigate();
   const firestore = useFirestore();
   useFirestoreConnect(["categorys", "write"]);
   const categorySelector = useSelector(
@@ -69,7 +71,9 @@ function Category() {
                       .map((writeID, index) => {
                         return (
                           <li key={index}>
-                            {writeSelector[writeID].info.title}
+                            <span onClick={() => navigate(`/${writeID}`)}>
+                              {writeSelector[writeID].info.title}
+                            </span>
                             <button
                               onClick={() =>
                                 firestore.doc(`write/${writeID}`).delete()

@@ -1,5 +1,24 @@
+import { useFirestoreConnect } from "react-redux-firebase";
+import { useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import DOMPurify from "dompurify";
+
 function DetailPage() {
-  return <div>Detail</div>;
+  const { id } = useParams();
+  const navigate = useNavigate();
+  useFirestoreConnect(["write"]);
+  const writeSelector = useSelector((state) => state.firestore.data.write);
+  return (
+    <div>
+      {writeSelector && (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(writeSelector[id].info.text),
+          }}
+        />
+      )}
+    </div>
+  );
 }
 
 export default DetailPage;
