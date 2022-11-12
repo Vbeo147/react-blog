@@ -55,7 +55,7 @@ function Category() {
                   {ulCategoryName}
                   <button
                     onClick={() =>
-                      firestore.doc(`tags/${ulCategoryName}`).delete()
+                      firestore.doc(`categorys/${ulCategoryName}`).delete()
                     }
                   >
                     X

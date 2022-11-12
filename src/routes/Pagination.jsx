@@ -30,15 +30,19 @@ function Pagination() {
     <>
       <CurrentList currentItems={currentItems} />
       <div>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel=">"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          pageCount={pageCount}
-          previousLabel="<"
-          renderOnZeroPageCount={null}
-        />
+        {writeSelector ? (
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            pageCount={pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+          />
+        ) : (
+          "게시글이 없습니다"
+        )}
       </div>
     </>
   );
