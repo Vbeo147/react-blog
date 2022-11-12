@@ -38,6 +38,7 @@ function Menu() {
                   <div onClick={onLogOut}>Log Out</div>
                 </div>
                 <div onClick={() => navigate("/")}>Home</div>
+                <div onClick={() => navigate("/about")}>About</div>
                 <div onClick={() => navigate("/write")}>글쓰기</div>
               </div>
             </>

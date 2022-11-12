@@ -50,7 +50,7 @@ function WritePage() {
       select: "",
     });
     setLoading(false);
-    navigate(-1);
+    navigate("/");
   };
   const readFileAsync = (file) => {
     return new Promise((resolve, reject) => {

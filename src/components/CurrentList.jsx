@@ -1,9 +1,11 @@
 import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function CurrentList({ currentItems }) {
   useFirestoreConnect(["write"]);
   const writeSelector = useSelector((state) => state.firestore.data.write);
+  const navigate = useNavigate();
   return (
     <div>
       <ul>
@@ -14,7 +16,9 @@ function CurrentList({ currentItems }) {
               const CurrentItem = writeSelector[currentID];
               return (
                 <li key={index}>
-                  <span>{CurrentItem.info.title}</span>
+                  <span onClick={() => navigate(`/detail/${currentID}`)}>
+                    {CurrentItem.info.title}
+                  </span>
                 </li>
               );
             })}

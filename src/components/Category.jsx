@@ -68,15 +68,17 @@ function Category() {
                         (id) =>
                           writeSelector[id]?.categoryName === ulCategoryName
                       )
-                      .map((writeID, index) => {
+                      .map((currentID, index) => {
                         return (
                           <li key={index}>
-                            <span onClick={() => navigate(`/${writeID}`)}>
-                              {writeSelector[writeID].info.title}
+                            <span
+                              onClick={() => navigate(`/detail/${currentID}`)}
+                            >
+                              {writeSelector[currentID].info.title}
                             </span>
                             <button
                               onClick={() =>
-                                firestore.doc(`write/${writeID}`).delete()
+                                firestore.doc(`write/${currentID}`).delete()
                               }
                             >
                               X
