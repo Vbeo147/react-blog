@@ -56,29 +56,37 @@ function Category() {
                 <ul key={index}>
                   {ulCategoryName}
                   <button
-                    onClick={() =>
-                      firestore.doc(`categorys/${ulCategoryName}`).delete()
-                    }
+                    onClick={() => {
+                      firestore.doc(`categorys/${ulCategoryName}`).delete();
+                      Object.keys(writeSelector)
+                        .filter(
+                          (ulID) =>
+                            writeSelector[ulID].categoryName === ulCategoryName
+                        )
+                        .map((ulcurrentID) =>
+                          firestore.doc(`write/${ulcurrentID}`).delete()
+                        );
+                    }}
                   >
                     X
                   </button>
                   {writeSelector &&
                     Object.keys(writeSelector)
                       .filter(
-                        (id) =>
-                          writeSelector[id]?.categoryName === ulCategoryName
+                        (liID) =>
+                          writeSelector[liID]?.categoryName === ulCategoryName
                       )
-                      .map((currentID, index) => {
+                      .map((licurrentID, index) => {
                         return (
                           <li key={index}>
                             <span
-                              onClick={() => navigate(`/detail/${currentID}`)}
+                              onClick={() => navigate(`/detail/${licurrentID}`)}
                             >
-                              {writeSelector[currentID].info.title}
+                              {writeSelector[licurrentID].info.title}
                             </span>
                             <button
                               onClick={() =>
-                                firestore.doc(`write/${currentID}`).delete()
+                                firestore.doc(`write/${licurrentID}`).delete()
                               }
                             >
                               X

@@ -70,7 +70,7 @@ function WritePage() {
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
     input.click();
-    input.addEventListener("change", async () => {
+    input.addEventListener("change", () => {
       const file = input.files[0];
       async function processFile() {
         try {
