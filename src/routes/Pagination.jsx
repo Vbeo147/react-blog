@@ -14,7 +14,11 @@ function Pagination() {
   useFirestoreConnect(["write"]);
   const writeSelector = useSelector((state) => state.firestore.data.write);
   const items = useMemo(
-    () => writeSelector && Object.keys(writeSelector),
+    () =>
+      writeSelector &&
+      Object.keys(writeSelector).filter(
+        (id) => writeSelector[id]?.info !== (null || undefined)
+      ),
     [writeSelector]
   );
   const itemsPerPage = 1;

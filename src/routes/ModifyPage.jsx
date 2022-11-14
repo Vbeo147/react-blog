@@ -87,7 +87,7 @@ function ModifyPage() {
       setTitle(writeSelector[id].info.title);
       setQuill(writeSelector[id].info.text);
     }
-  }, [writeSelector]);
+  }, [writeSelector, id]);
   return (
     <>
       {writeSelector ? (

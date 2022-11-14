@@ -63,7 +63,7 @@ function Category() {
                           (ulID) =>
                             writeSelector[ulID].categoryName === ulCategoryName
                         )
-                        .map((ulcurrentID) =>
+                        .forEach((ulcurrentID) =>
                           firestore.doc(`write/${ulcurrentID}`).delete()
                         );
                     }}
@@ -92,7 +92,9 @@ function Category() {
                               X
                             </button>
                             <button
-                              onClick={() => navigate(`/modify/${licurrentID}`)}
+                              onClick={() => {
+                                navigate(`/modify/${licurrentID}`);
+                              }}
                             >
                               T
                             </button>
