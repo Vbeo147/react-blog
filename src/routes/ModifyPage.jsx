@@ -51,7 +51,7 @@ function ModifyPage() {
           const storageRef = firebase.storage().ref().child(uuidv4());
           const response = await storageRef.putString(Url, "data_url");
           storageUrl = await response.ref.getDownloadURL();
-          // editor set image
+          // editor add image
           const editor = quillRef.current.getEditor();
           const range = editor.getSelection();
           editor.insertEmbed(range.index, "image", storageUrl);
