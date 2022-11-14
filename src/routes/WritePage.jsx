@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from "uuid";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ImageResize from "quill-image-resize";
+import readFileAsync from "../components/readFileAsync";
+import formats from "../components/QuillFormats";
 
 Quill.register("modules/ImageResize", ImageResize);
 
@@ -45,25 +47,9 @@ function WritePage() {
       createdAt: Date.now(),
       info: { title, text: quill },
     });
-    setValue({
-      title: "",
-      select: "",
-    });
+    setValue("");
     setLoading(false);
     navigate("/");
-  };
-  const readFileAsync = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-
-      reader.onerror = reject;
-
-      reader.readAsDataURL(file);
-    });
   };
   const imageHandler = () => {
     const input = document.createElement("input");
@@ -111,20 +97,6 @@ function WritePage() {
       },
     };
   }, []);
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "color",
-    "background",
-  ];
   return (
     <div>
       <form onSubmit={onSubmit}>

@@ -91,6 +91,11 @@ function Category() {
                             >
                               X
                             </button>
+                            <button
+                              onClick={() => navigate(`/modify/${licurrentID}`)}
+                            >
+                              T
+                            </button>
                           </li>
                         );
                       })}
