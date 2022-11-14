@@ -1,4 +1,7 @@
-const formats = [
+import ImageResize from "quill-image-resize";
+import { Quill } from "react-quill";
+
+const Quillformats = [
   "header",
   "bold",
   "italic",
@@ -13,4 +16,6 @@ const formats = [
   "background",
 ];
 
-export default formats;
+export default Quill.register("modules/ImageResize", ImageResize);
+
+export const formats = Quillformats;

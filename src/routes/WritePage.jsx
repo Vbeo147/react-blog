@@ -9,11 +9,8 @@ import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import ImageResize from "quill-image-resize";
 import readFileAsync from "../components/readFileAsync";
 import formats from "../components/QuillFormats";
-
-Quill.register("modules/ImageResize", ImageResize);
 
 function WritePage() {
   const [value, setValue] = useState({ title: "", select: "" });

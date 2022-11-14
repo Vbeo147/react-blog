@@ -9,10 +9,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import readFileAsync from "../components/readFileAsync";
 import formats from "../components/QuillFormats";
 import ReactQuill, { Quill } from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import ImageResize from "quill-image-resize";
-
-Quill.register("modules/ImageResize", ImageResize);
 
 function ModifyPage() {
   const [title, setTitle] = useState("");
