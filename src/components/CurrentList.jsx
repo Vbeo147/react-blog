@@ -17,7 +17,7 @@ function CurrentList({ currentItems }) {
               return (
                 <li key={index}>
                   <span onClick={() => navigate(`/detail/${currentID}`)}>
-                    {CurrentItem.info.title}
+                    {`[ ${CurrentItem.categoryName} ] ${CurrentItem.info.title}`}
                   </span>
                 </li>
               );

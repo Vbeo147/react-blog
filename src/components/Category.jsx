@@ -85,16 +85,15 @@ function Category() {
                               {writeSelector[licurrentID].info.title}
                             </span>
                             <button
-                              onClick={() =>
-                                firestore.doc(`write/${licurrentID}`).delete()
-                              }
+                              onClick={() => {
+                                firestore.doc(`write/${licurrentID}`).delete();
+                                navigate("/");
+                              }}
                             >
                               X
                             </button>
                             <button
-                              onClick={() => {
-                                navigate(`/modify/${licurrentID}`);
-                              }}
+                              onClick={() => navigate(`/modify/${licurrentID}`)}
                             >
                               T
                             </button>
