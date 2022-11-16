@@ -11,6 +11,7 @@ function AppRouter() {
     <>
       <Routes>
         <Route exact path="/" element={<CurrentPagination />} />
+        <Route exact path="/page/:page" element={<CurrentPagination />} />
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/write" element={<WritePage />} />
         <Route path="/modify/:id" element={<ModifyPage />} />

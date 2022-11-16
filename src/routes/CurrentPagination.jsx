@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef } from "react";
+import { useParams } from "react-router-dom";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import Pagination from "../components/Pagination";
@@ -6,6 +7,7 @@ import Pagination from "../components/Pagination";
 function CurrentPagination() {
   const [sort, setSort] = useState(false);
   const [tagSearch, setTagSearch] = useState("");
+  const { page } = useParams();
   const inputRef = useRef();
   useFirestoreConnect(["write"]);
   const writeSelector = useSelector((state) => state.firestore.data.write);
@@ -29,7 +31,6 @@ function CurrentPagination() {
   const onChange = (e) => {
     setTagSearch(e.target.value);
   };
-  console.log(items);
   return (
     <>
       <div>
@@ -53,7 +54,7 @@ function CurrentPagination() {
         </button>
       </div>
       <div>
-        <Pagination itemsPerPage={1} items={items} />
+        <Pagination itemsPerPage={1} items={items} paramPage={page} />
       </div>
     </>
   );
