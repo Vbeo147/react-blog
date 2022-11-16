@@ -27,7 +27,7 @@ function Pagination() {
             .toLowerCase()
             .includes(tagSearch.toLowerCase());
         }),
-    [writeSelector, sort, tagSearch]1
+    [writeSelector, sort, tagSearch]
   );
   const itemsPerPage = 10;
   useEffect(() => {
