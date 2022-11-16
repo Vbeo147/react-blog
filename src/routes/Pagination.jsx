@@ -1,5 +1,5 @@
 import ReactPaginate from "react-paginate";
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import CurrentList from "../components/CurrentList";
@@ -10,7 +10,6 @@ function Pagination() {
   const [itemOffset, setItemOffset] = useState(0);
   const [sort, setSort] = useState(false);
   const [tagSearch, setTagSearch] = useState("");
-  const inputRef = useRef();
   useFirestoreConnect(["write"]);
   const writeSelector = useSelector((state) => state.firestore.data.write);
   const items = useMemo(
@@ -28,7 +27,7 @@ function Pagination() {
             .toLowerCase()
             .includes(tagSearch.toLowerCase());
         }),
-    [writeSelector, sort, tagSearch]
+    [writeSelector, sort, tagSearch]1
   );
   const itemsPerPage = 10;
   useEffect(() => {
@@ -53,16 +52,11 @@ function Pagination() {
           value={tagSearch || ""}
           onChange={onChange}
           placeholder="검색할 태그를 입력해주세요"
-          ref={inputRef}
+          id="search_input"
         />
-        <button
-          onClick={() => {
-            setTagSearch("");
-            inputRef.current.focus();
-          }}
-        >
+        <label htmlFor="search_input" onClick={() => setTagSearch("")}>
           X
-        </button>
+        </label>
         <button onClick={() => setSort(!sort)}>
           {sort ? "오래된순" : "최신순"}
         </button>
