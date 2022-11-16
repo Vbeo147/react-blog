@@ -8,6 +8,7 @@ function CurrentPagination() {
   const [sort, setSort] = useState(false);
   const [tagSearch, setTagSearch] = useState("");
   const { page } = useParams();
+  const BtnLimit = 5;
   const inputRef = useRef();
   useFirestoreConnect(["write"]);
   const writeSelector = useSelector((state) => state.firestore.data.write);
@@ -54,7 +55,12 @@ function CurrentPagination() {
         </button>
       </div>
       <div>
-        <Pagination itemsPerPage={1} items={items} paramPage={page} />
+        <Pagination
+          itemsPerPage={1}
+          items={items}
+          currentPage={parseInt(page)}
+          BtnLimit={BtnLimit}
+        />
       </div>
     </>
   );

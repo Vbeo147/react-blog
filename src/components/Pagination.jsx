@@ -2,32 +2,37 @@ import CurrentList from "./CurrentList";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Pagination({ itemsPerPage, items, paramPage }) {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [PageCount, setPageCount] = useState(0);
-  const [startIndex, setStartIndex] = useState(paramPage);
-  const [lastIndex, setLastIndex] = useState(3);
+function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
+  const [lastIndex, setLastIndex] = useState(0);
   const navigate = useNavigate();
-  const BtnLimit = 5;
   useEffect(() => {
     if (items) {
       setPageCount(Math.ceil(items.length / itemsPerPage));
-      console.log(paramPage);
     }
-  }, [itemsPerPage, items, paramPage]);
+  }, [items, itemsPerPage]);
+  console.log(
+    `start : ${startIndex}\n last : ${lastIndex}\n page: ${pageCount}`
+  );
+  const test = new Array(30).fill().map((item, index) => index);
   return (
     <>
-      <div>{/* Components CurrentList */}</div>
+      <div>{}</div>
       <ul>
-        {new Array(BtnLimit).fill().map((item, index) => {
-          const CurrentBtnNumber = index + 1;
+        {test.slice(startIndex, lastIndex).map((item, index) => {
           return (
             <li
-              onClick={() => navigate(`/page/${CurrentBtnNumber}`)}
-              style={{ display: "inline", marginRight: "5px" }}
+              onClick={() => navigate(`/page/${item}`)}
+              style={{
+                display: "inline",
+                marginRight: "8px",
+                cursor: "pointer",
+              }}
               key={index}
             >
-              {CurrentBtnNumber}
+              {item + 1}
             </li>
           );
         })}
