@@ -11,7 +11,13 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
   useEffect(() => {
     if (items) {
       setPageCount(Math.ceil(items.length / itemsPerPage));
-      setStartIndex(pageCount - (pageCount - currentPage) - 1);
+      setStartIndex(
+        currentPage < BtnLimit
+          ? 0
+          : Math.floor(currentPage / BtnLimit) * BtnLimit -
+              (Math.floor(currentPage / pageCount) +
+                Math.ceil(pageCount / currentPage))
+      );
       setLastIndex(
         startIndex + BtnLimit > pageCount ? pageCount : startIndex + BtnLimit
       );
@@ -24,24 +30,28 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
     items && new Array(items.length).fill().map((item, index) => index);
   return (
     <>
-      <ul>
-        {items &&
-          itemArr.slice(startIndex, lastIndex).map((item, index) => {
-            return (
-              <li
-                onClick={() => navigate(`/page/${item + 1}`)}
-                style={{
-                  display: "inline",
-                  marginRight: "8px",
-                  cursor: "pointer",
-                }}
-                key={index}
-              >
-                {item + 1}
-              </li>
-            );
-          })}
-      </ul>
+      {items && (
+        <>
+          <div></div>
+          <ul>
+            {itemArr.slice(startIndex, lastIndex).map((item, index) => {
+              return (
+                <li
+                  onClick={() => navigate(`/page/${item + 1}`)}
+                  style={{
+                    display: "inline",
+                    marginRight: "8px",
+                    cursor: "pointer",
+                  }}
+                  key={index}
+                >
+                  {item + 1}
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
     </>
   );
 }
