@@ -11,20 +11,17 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
   useEffect(() => {
     if (items) {
       setPageCount(Math.ceil(items.length / itemsPerPage));
-      setStartIndex(
-        Math.floor(currentPage / BtnLimit) * BtnLimit -
-          (Math.floor(currentPage / BtnLimit) % pageCount)
-      );
-      setLastIndex(
-        startIndex + BtnLimit > pageCount ? pageCount : startIndex + BtnLimit
-      );
+      setStartIndex(Math.floor(currentPage / BtnLimit) * BtnLimit - 1);
+      setLastIndex(startIndex + BtnLimit);
     }
-  }, [items, itemsPerPage, currentPage, startIndex, pageCount]);
-  console.log(
-    `start : ${startIndex}\n last : ${lastIndex}\n page: ${pageCount}`
-  );
+  }, [items, itemsPerPage, currentPage, BtnLimit, startIndex]);
   const itemArr =
     items && new Array(items.length).fill().map((item, index) => index);
+  const SaveStartIndex = items && itemArr[startIndex];
+  const SaveLastIndex = items && itemArr[lastIndex];
+  const onPageClick = (page) => {
+    navigate(`/page/${page + 1}`);
+  };
   return (
     <>
       {items && (
@@ -34,7 +31,7 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
             {itemArr.slice(startIndex, lastIndex).map((item, index) => {
               return (
                 <li
-                  onClick={() => navigate(`/page/${item + 1}`)}
+                  onClick={() => onPageClick(item)}
                   style={{
                     display: "inline",
                     marginRight: "8px",
