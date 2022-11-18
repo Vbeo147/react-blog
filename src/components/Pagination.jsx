@@ -12,11 +12,8 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
     if (items) {
       setPageCount(Math.ceil(items.length / itemsPerPage));
       setStartIndex(
-        currentPage < BtnLimit
-          ? 0
-          : Math.floor(currentPage / BtnLimit) * BtnLimit -
-              (Math.floor(currentPage / pageCount) +
-                Math.ceil(pageCount / currentPage))
+        Math.floor(currentPage / BtnLimit) * BtnLimit -
+          (Math.floor(currentPage / BtnLimit) % pageCount)
       );
       setLastIndex(
         startIndex + BtnLimit > pageCount ? pageCount : startIndex + BtnLimit
