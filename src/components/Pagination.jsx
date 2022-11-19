@@ -3,35 +3,50 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
-  const [currentItems, setCurrentItems] = useState([]);
+  const [currentItems, setCurrentItems] = useState();
   const [pageCount, setPageCount] = useState(0);
-  const [startIndex, setStartIndex] = useState(0);
-  const [lastIndex, setLastIndex] = useState(BtnLimit);
+  const [startBtnIndex, setStartBtnIndex] = useState(
+    Math.floor(currentPage / BtnLimit) * BtnLimit
+  );
+  const [lastBtnIndex, setLastBtnIndex] = useState(BtnLimit);
   const navigate = useNavigate();
+  const BtnArr =
+    items &&
+    new Array(items.length)
+      .fill()
+      .map((item, index) => index)
+      .slice(startBtnIndex, lastBtnIndex);
+  const SaveStartIndex = items && BtnArr[0];
+  const SaveLastIndex = items && BtnArr[BtnLimit - 1];
   useEffect(() => {
     if (items) {
       setPageCount(Math.ceil(items.length / itemsPerPage));
-      setStartIndex(Math.floor(currentPage / BtnLimit) * BtnLimit - 1);
-      setLastIndex(startIndex + BtnLimit);
+      if (currentPage - 1 === SaveStartIndex) {
+        setStartBtnIndex((prev) =>
+          currentPage < BtnLimit ? 0 : prev - BtnLimit
+        );
+      } else if (currentPage - 1 === SaveLastIndex) {
+        setStartBtnIndex((prev) =>
+          currentPage < BtnLimit ? 0 : prev + BtnLimit
+        );
+      }
+      setLastBtnIndex(
+        startBtnIndex + BtnLimit > pageCount
+          ? pageCount
+          : startBtnIndex + BtnLimit
+      );
     }
-  }, [items, itemsPerPage, currentPage, BtnLimit, startIndex]);
-  const itemArr =
-    items && new Array(items.length).fill().map((item, index) => index);
-  const SaveStartIndex = items && itemArr[startIndex];
-  const SaveLastIndex = items && itemArr[lastIndex];
-  const onPageClick = (page) => {
-    navigate(`/page/${page + 1}`);
-  };
+  }, [items, itemsPerPage, currentPage, BtnLimit, startBtnIndex, BtnArr]);
   return (
     <>
       {items && (
         <>
           <div></div>
           <ul>
-            {itemArr.slice(startIndex, lastIndex).map((item, index) => {
+            {BtnArr.map((item, index) => {
               return (
                 <li
-                  onClick={() => onPageClick(item)}
+                  onClick={() => navigate(`/page/${item + 1}`)}
                   style={{
                     display: "inline",
                     marginRight: "8px",
