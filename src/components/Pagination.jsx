@@ -18,6 +18,7 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
       .slice(startBtnIndex, lastBtnIndex);
   const SaveStartIndex = items && BtnArr[0];
   const SaveLastIndex = items && BtnArr[BtnLimit - 1];
+  //
   useEffect(() => {
     const isHome = currentPage < BtnLimit;
     if (items) {
@@ -43,6 +44,7 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
       setCurrentItems(items.slice(itemOffset, endOffset));
     }
   }, [currentPage, items]);
+  //
   return (
     <>
       {items && (

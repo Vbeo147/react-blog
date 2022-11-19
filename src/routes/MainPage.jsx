@@ -4,7 +4,7 @@ import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import Pagination from "../components/Pagination";
 
-function CurrentPagination() {
+function MainPage() {
   const [sort, setSort] = useState(false);
   const [tagSearch, setTagSearch] = useState("");
   const { page } = useParams();
@@ -60,4 +60,4 @@ function CurrentPagination() {
   );
 }
 
-export default CurrentPagination;
+export default MainPage;
