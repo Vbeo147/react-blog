@@ -7,13 +7,13 @@ import { firestoreReducer } from "redux-firestore";
 import { combineReducers } from "redux";
 
 const fbConfig = {
-  apiKey: "AIzaSyAkfoVPY7KHRfTONsgCSeoWDk4DisytmY0",
-  authDomain: "blog-4cd65.firebaseapp.com",
-  projectId: "blog-4cd65",
-  storageBucket: "blog-4cd65.appspot.com",
-  messagingSenderId: "801967607293",
-  appId: "1:801967607293:web:74aa1468b705af0f885d94",
-  measurementId: "G-MTC5L9T9ST",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGIN_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 firebase.initializeApp(fbConfig);
