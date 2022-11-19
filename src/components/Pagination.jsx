@@ -35,7 +35,7 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
           : startBtnIndex + BtnLimit
       );
     }
-  }, [startBtnIndex, BtnArr, pageCount]);
+  }, [items, currentPage, startBtnIndex, BtnArr, pageCount]);
   useEffect(() => {
     const itemOffset = (currentPage - 1) * itemsPerPage;
     const endOffset = itemOffset + itemsPerPage;
