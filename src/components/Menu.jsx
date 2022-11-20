@@ -7,6 +7,9 @@ function Menu() {
       <div className="mx-auto mt-10">
         <Auth />
       </div>
+      <div className="mx-auto mt-10">
+        <Category />
+      </div>
     </div>
   );
 }
