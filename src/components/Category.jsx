@@ -53,23 +53,27 @@ function Category() {
             })
             .map((ulCategoryName, index) => {
               return (
-                <ul key={index}>
-                  {ulCategoryName}
-                  <button
-                    onClick={() => {
-                      firestore.doc(`categorys/${ulCategoryName}`).delete();
-                      Object.keys(writeSelector)
-                        .filter(
-                          (ulID) =>
-                            writeSelector[ulID].categoryName === ulCategoryName
-                        )
-                        .forEach((ulcurrentID) =>
-                          firestore.doc(`write/${ulcurrentID}`).delete()
-                        );
-                    }}
-                  >
-                    X
-                  </button>
+                <details key={index}>
+                  <summary>
+                    {ulCategoryName}{" "}
+                    <button
+                      onClick={() => {
+                        firestore.doc(`categorys/${ulCategoryName}`).delete();
+                        Object.keys(writeSelector)
+                          .filter(
+                            (ulID) =>
+                              writeSelector[ulID].categoryName ===
+                              ulCategoryName
+                          )
+                          .forEach((ulcurrentID) =>
+                            firestore.doc(`write/${ulcurrentID}`).delete()
+                          );
+                      }}
+                    >
+                      X
+                    </button>
+                  </summary>
+
                   {writeSelector &&
                     Object.keys(writeSelector)
                       .filter(
@@ -78,7 +82,7 @@ function Category() {
                       )
                       .map((licurrentID, index) => {
                         return (
-                          <li key={index}>
+                          <div key={index}>
                             <span
                               onClick={() => navigate(`/detail/${licurrentID}`)}
                             >
@@ -97,10 +101,10 @@ function Category() {
                             >
                               T
                             </button>
-                          </li>
+                          </div>
                         );
                       })}
-                </ul>
+                </details>
               );
             })}
       </div>

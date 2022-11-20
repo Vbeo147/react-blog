@@ -50,7 +50,7 @@ function MainPage() {
       </div>
       <div>
         <Pagination
-          itemsPerPage={10}
+          itemsPerPage={1}
           items={items}
           currentPage={page ? parseInt(page) : 1}
           BtnLimit={BtnLimit}

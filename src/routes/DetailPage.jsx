@@ -1,10 +1,11 @@
 import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 
 function DetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   useFirestoreConnect(["write"]);
   const writeSelector = useSelector((state) => state.firestore.data.write);
   return (
@@ -18,6 +19,9 @@ function DetailPage() {
           />
         </>
       )}
+      <div>
+        <button onClick={() => navigate(-1)}>이전 페이지</button>
+      </div>
     </div>
   );
 }

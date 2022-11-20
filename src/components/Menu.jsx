@@ -17,29 +17,20 @@ function Menu() {
   const navigate = useNavigate();
   return (
     <>
-      <div
-        style={{
-          width: "100%",
-          height: "80px",
-          border: "1px solid black",
-        }}
-      >
+      <div>
         <div>
           {isLoaded(auth) && !isEmpty(auth) ? (
             <>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                }}
-              >
+              <div>
                 <div>
                   <div>{auth.displayName}</div>
                   <div onClick={onLogOut}>Log Out</div>
                 </div>
                 <div onClick={() => navigate("/")}>Home</div>
                 <div onClick={() => navigate("/about")}>About</div>
-                <div onClick={() => navigate("/write")}>글쓰기</div>
+                {auth.uid == import.meta.env.VITE_ADMIN_UID && (
+                  <div onClick={() => navigate("/write")}>글쓰기</div>
+                )}
               </div>
             </>
           ) : (
