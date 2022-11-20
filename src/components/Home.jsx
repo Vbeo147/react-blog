@@ -1,7 +1,6 @@
 import { isLoaded } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import Menu from "./Menu";
-import Category from "./Category";
 import AppRouter from "./AppRouter";
 
 function HomePage() {
@@ -12,19 +11,7 @@ function HomePage() {
         <div>
           <div>
             <Menu />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-            }}
-          >
-            <div>
-              <Category />
-            </div>
-            <div>
-              <AppRouter />
-            </div>
+            <AppRouter />
           </div>
         </div>
       ) : (

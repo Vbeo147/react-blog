@@ -1,2 +1,3 @@
 # react-blog
-use Redux + Firebase
+
+use Redux + Firebase + TailwindCSS
