@@ -61,8 +61,9 @@ function Category() {
               return (
                 <details id="details" key={index}>
                   <summary>
-                    {ulCategoryName}
-                    <span className="mr-2.5"></span>
+                    <span title={ulCategoryName} className="mr-6">
+                      {ulCategoryName}
+                    </span>
                     <button
                       className="category-btn"
                       onClick={() => {
@@ -93,6 +94,8 @@ function Category() {
                       .map((licurrentID, index) => {
                         return (
                           <div
+                            className="w-[300px]"
+                            title={writeSelector[licurrentID].info.title}
                             key={index}
                             onClick={() => navigate(`/detail/${licurrentID}`)}
                           >

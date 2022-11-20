@@ -16,7 +16,7 @@ function Auth() {
   };
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col justify-center w-[200px]">
+    <div className="flex flex-col justify-center w-[260px]">
       {isLoaded(auth) && !isEmpty(auth) ? (
         <>
           <h1 className="flex justify-center items-center mb-[10px] text-2xl font-bold opacity-80 tracking-tighter select-none">

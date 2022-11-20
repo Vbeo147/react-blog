@@ -13,7 +13,7 @@ function HomePage() {
           <div>
             <Menu />
           </div>
-          <div className="pl-[320px]">
+          <div className="pl-[420px]">
             <AppRouter />
           </div>
         </div>
