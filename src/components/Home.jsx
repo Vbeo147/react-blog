@@ -10,7 +10,7 @@ function HomePage() {
     <>
       {isLoaded(auth) ? (
         <div className="flex flex-row">
-          <div className="scroll-container">
+          <div>
             <Menu />
           </div>
           <div className="pl-[320px]">

@@ -67,18 +67,21 @@ function Category() {
                     {ulCategoryName}
                     <span className="mr-2.5"></span>
                     <button
-                      className="border border-gray-400 text-xs rounded-[20px] px-1 font-bold"
+                      className="category-btn"
                       onClick={() => {
-                        firestore.doc(`categorys/${ulCategoryName}`).delete();
-                        Object.keys(writeSelector)
-                          .filter(
-                            (ulID) =>
-                              writeSelector[ulID].categoryName ===
-                              ulCategoryName
-                          )
-                          .forEach((ulcurrentID) =>
-                            firestore.doc(`write/${ulcurrentID}`).delete()
-                          );
+                        const ok = window.confirm("태그를 삭제합니다.");
+                        if (ok) {
+                          firestore.doc(`categorys/${ulCategoryName}`).delete();
+                          Object.keys(writeSelector)
+                            .filter(
+                              (ulID) =>
+                                writeSelector[ulID].categoryName ===
+                                ulCategoryName
+                            )
+                            .forEach((ulcurrentID) =>
+                              firestore.doc(`write/${ulcurrentID}`).delete()
+                            );
+                        }
                       }}
                     >
                       X
@@ -99,6 +102,7 @@ function Category() {
                               {writeSelector[licurrentID].info.title}
                             </span>
                             <button
+                              className="category-btn"
                               onClick={() => {
                                 firestore.doc(`write/${licurrentID}`).delete();
                                 navigate("/");

@@ -3,7 +3,10 @@ import Category from "./Category";
 
 function Menu() {
   return (
-    <div className="fixed flex flex-col items-start border border-black w-[300px] h-full overflow-y-scroll">
+    <div
+      id="menu-scroll"
+      className="fixed flex flex-col items-start border border-black w-[300px] h-full overflow-y-scroll"
+    >
       <div className="mx-auto mt-10">
         <Auth />
       </div>
