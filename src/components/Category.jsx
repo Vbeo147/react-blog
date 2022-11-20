@@ -59,11 +59,8 @@ function Category() {
             })
             .map((ulCategoryName, index) => {
               return (
-                <details
-                  key={index}
-                  className="border border-gray-300 px-[40px] py-1.5 cursor-pointer"
-                >
-                  <summary className="border border-b-gray-400 border-t-transparent border-x-transparent select-none flex flex-row items-center">
+                <details id="details" key={index}>
+                  <summary>
                     {ulCategoryName}
                     <span className="mr-2.5"></span>
                     <button
@@ -95,26 +92,11 @@ function Category() {
                       )
                       .map((licurrentID, index) => {
                         return (
-                          <div key={index}>
-                            <span
-                              onClick={() => navigate(`/detail/${licurrentID}`)}
-                            >
-                              {writeSelector[licurrentID].info.title}
-                            </span>
-                            <button
-                              className="category-btn"
-                              onClick={() => {
-                                firestore.doc(`write/${licurrentID}`).delete();
-                                navigate("/");
-                              }}
-                            >
-                              X
-                            </button>
-                            <button
-                              onClick={() => navigate(`/modify/${licurrentID}`)}
-                            >
-                              T
-                            </button>
+                          <div
+                            key={index}
+                            onClick={() => navigate(`/detail/${licurrentID}`)}
+                          >
+                            <span>{writeSelector[licurrentID].info.title}</span>
                           </div>
                         );
                       })}

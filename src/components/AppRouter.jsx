@@ -5,7 +5,6 @@ import WritePage from "../routes/WritePage";
 import MainPage from "../routes/MainPage";
 import DetailPage from "../routes/DetailPage";
 import ModifyPage from "../routes/ModifyPage";
-import "../css/reset.css";
 
 function AppRouter() {
   const auth = useSelector((state) => state.firebase.auth);

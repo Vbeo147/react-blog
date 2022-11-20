@@ -1,0 +1,29 @@
+#details {
+  border: 2px solid lightgray;
+  border-radius: 4px;
+  padding: 0.5em;
+  user-select: none;
+}
+
+#details summary {
+  font-weight: bold;
+}
+
+#details[open] {
+  padding: 10px;
+}
+
+#details[open] summary {
+  padding: 5px;
+}
+
+#details[open] div {
+  border: 1px solid lightgray;
+  padding: 2px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
