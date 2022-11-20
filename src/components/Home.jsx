@@ -10,7 +10,7 @@ function HomePage() {
     <>
       {isLoaded(auth) ? (
         <div>
-          <div>
+          <div className="flex flex-row">
             <Menu />
             <AppRouter />
           </div>
