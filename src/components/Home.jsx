@@ -2,6 +2,7 @@ import { isLoaded } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import Menu from "./Menu";
 import AppRouter from "./AppRouter";
+import "../index.css";
 
 function HomePage() {
   const auth = useSelector((state) => state.firebase.auth);

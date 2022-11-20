@@ -16,29 +16,27 @@ function Auth() {
   };
   const navigate = useNavigate();
   return (
-    <>
+    <div>
       <div>
-        <div>
-          {isLoaded(auth) && !isEmpty(auth) ? (
-            <>
+        {isLoaded(auth) && !isEmpty(auth) ? (
+          <>
+            <div>
               <div>
-                <div>
-                  <div>{auth.displayName}</div>
-                  <div onClick={onLogOut}>Log Out</div>
-                </div>
-                <div onClick={() => navigate("/")}>Home</div>
-                <div onClick={() => navigate("/about")}>About</div>
-                {auth.uid == import.meta.env.VITE_ADMIN_UID && (
-                  <div onClick={() => navigate("/write")}>글쓰기</div>
-                )}
+                <div>{auth.displayName}</div>
+                <div onClick={onLogOut}>Log Out</div>
               </div>
-            </>
-          ) : (
-            <div onClick={onLogIn}>Log In</div>
-          )}
-        </div>
+              <div onClick={() => navigate("/")}>Home</div>
+              <div onClick={() => navigate("/about")}>About</div>
+              {auth.uid == import.meta.env.VITE_ADMIN_UID && (
+                <div onClick={() => navigate("/write")}>글쓰기</div>
+              )}
+            </div>
+          </>
+        ) : (
+          <div onClick={onLogIn}>Log In</div>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 
