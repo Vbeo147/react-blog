@@ -9,9 +9,11 @@ function HomePage() {
   return (
     <>
       {isLoaded(auth) ? (
-        <div>
-          <div className="flex flex-row">
+        <div className="flex flex-row">
+          <div className="scroll-container">
             <Menu />
+          </div>
+          <div className="pl-[320px]">
             <AppRouter />
           </div>
         </div>

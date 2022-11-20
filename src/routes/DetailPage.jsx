@@ -19,9 +19,6 @@ function DetailPage() {
           />
         </>
       )}
-      <div>
-        <button onClick={() => navigate(-1)}>이전 페이지</button>
-      </div>
     </div>
   );
 }

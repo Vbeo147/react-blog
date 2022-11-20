@@ -54,7 +54,7 @@ function Auth() {
       {auth.uid === import.meta.env.VITE_ADMIN_UID && (
         <button
           className="mt-7 text-lg border border-y-gray-400 border-x-transparent py-[10px] font-bold"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/write")}
         >
           글쓰기
         </button>

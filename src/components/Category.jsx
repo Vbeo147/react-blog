@@ -12,6 +12,7 @@ function Category() {
     (state) => state.firestore.data.categorys
   );
   const writeSelector = useSelector((state) => state.firestore.data.write);
+  const auth = useSelector((state) => state.firebase.auth);
   const onChange = (e) => {
     setCategory(e.target.value);
   };
@@ -23,19 +24,30 @@ function Category() {
     setCategory("");
   };
   return (
-    <div>
-      <div>
-        <form onSubmit={onSubmit}>
-          <input
-            onChange={onChange}
-            value={category}
-            type="text"
-            placeholder="추가할 태그를 입력해주세요"
-            required
-          />
-          <button type="submit">+</button>
-        </form>
-      </div>
+    <div className="flex flex-col justify-center items-center mb-10">
+      {auth.uid === import.meta.env.VITE_ADMIN_UID && (
+        <div className="mb-7 border border-gray-300 p-10">
+          <form
+            className="flex flex-col justify-center items-center"
+            onSubmit={onSubmit}
+          >
+            <input
+              className="flex items-center text-sm w-full m-2.5 border border-b-gray-400 border-x-transparent border-t-transparent text-center"
+              onChange={onChange}
+              value={category}
+              type="text"
+              placeholder="추가할 태그를 입력해주세요"
+              required
+            />
+            <button
+              className="text-xs font-bold border border-gray-400 px-1.5 py-0.5 rounded-[12px]"
+              type="submit"
+            >
+              추가
+            </button>
+          </form>
+        </div>
+      )}
       <div>
         {categorySelector &&
           Object.keys(categorySelector)
@@ -47,10 +59,15 @@ function Category() {
             })
             .map((ulCategoryName, index) => {
               return (
-                <details key={index}>
-                  <summary>
-                    {ulCategoryName}{" "}
+                <details
+                  key={index}
+                  className="border border-gray-300 px-[40px] py-1.5 cursor-pointer"
+                >
+                  <summary className="border border-b-gray-400 border-t-transparent border-x-transparent select-none flex flex-row items-center">
+                    {ulCategoryName}
+                    <span className="mr-2.5"></span>
                     <button
+                      className="border border-gray-400 text-xs rounded-[20px] px-1 font-bold"
                       onClick={() => {
                         firestore.doc(`categorys/${ulCategoryName}`).delete();
                         Object.keys(writeSelector)
@@ -67,7 +84,6 @@ function Category() {
                       X
                     </button>
                   </summary>
-
                   {writeSelector &&
                     Object.keys(writeSelector)
                       .filter(
