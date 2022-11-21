@@ -12,7 +12,7 @@
 
 #details span {
   display: inline-flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   width: 70%;
   font-weight: bold;
@@ -33,7 +33,7 @@
   border: 1px solid lightgray;
   padding: 2.5px 10px 2.5px 10px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   cursor: pointer;
   font-weight: bold;

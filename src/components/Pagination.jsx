@@ -23,7 +23,7 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
     const isHome = currentPage < BtnLimit;
     if (items) {
       setPageCount(Math.ceil(items.length / itemsPerPage));
-      if (pageCount > BtnLimit) {
+      if (pageCount > BtnLimit && currentPage !== pageCount) {
         if (SaveStartIndex === currentPage - 1) {
           setStartBtnIndex((prev) => (isHome ? 0 : prev - BtnLimit));
         } else if (SaveLastIndex === currentPage - 1) {

@@ -65,7 +65,7 @@ function Category() {
                       {ulCategoryName}
                     </span>
                     <button
-                      className="category-btn"
+                      className="border border-2 border-gray-400 text-xs rounded-[2px] px-1.5 font-bold"
                       onClick={() => {
                         const ok = window.confirm("태그를 삭제합니다.");
                         if (ok) {

@@ -9,7 +9,7 @@ function MainPage() {
   const [tagSearch, setTagSearch] = useState("");
   const { page } = useParams();
   const BtnLimit = 5;
-  const itemsPerPage = 10;
+  const itemsPerPage = 1;
   useFirestoreConnect(["write"]);
   const writeSelector = useSelector((state) => state.firestore.data.write);
   const items = useMemo(

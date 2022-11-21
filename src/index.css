@@ -9,9 +9,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-  .category-btn {
-    @apply border border-2 border-gray-400 text-xs rounded-[2px] px-1.5 font-bold;
-  }
-}
