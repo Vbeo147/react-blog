@@ -116,7 +116,7 @@ function WritePage() {
         <div className="mb-6 border border-2 focus-within:border-black">
           <CustomToolbar />
           <ReactQuill
-            className="w-[720px] h-auto"
+            className="w-[720px] 2xl:w-[1000px] h-auto"
             theme="snow"
             ref={quillRef}
             modules={modules}

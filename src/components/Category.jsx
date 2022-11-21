@@ -64,26 +64,30 @@ function Category() {
                     <span title={ulCategoryName} className="mr-6">
                       {ulCategoryName}
                     </span>
-                    <button
-                      className="border border-2 border-gray-400 text-xs rounded-[2px] px-1.5 font-bold"
-                      onClick={() => {
-                        const ok = window.confirm("태그를 삭제합니다.");
-                        if (ok) {
-                          firestore.doc(`categorys/${ulCategoryName}`).delete();
-                          Object.keys(writeSelector)
-                            .filter(
-                              (ulID) =>
-                                writeSelector[ulID].categoryName ===
-                                ulCategoryName
-                            )
-                            .forEach((ulcurrentID) =>
-                              firestore.doc(`write/${ulcurrentID}`).delete()
-                            );
-                        }
-                      }}
-                    >
-                      X
-                    </button>
+                    {auth.uid === import.meta.env.VITE_ADMIN_UID && (
+                      <button
+                        className="border border-2 border-gray-400 text-xs rounded-[2px] px-1.5 font-bold"
+                        onClick={() => {
+                          const ok = window.confirm("태그를 삭제합니다.");
+                          if (ok) {
+                            firestore
+                              .doc(`categorys/${ulCategoryName}`)
+                              .delete();
+                            Object.keys(writeSelector)
+                              .filter(
+                                (ulID) =>
+                                  writeSelector[ulID].categoryName ===
+                                  ulCategoryName
+                              )
+                              .forEach((ulcurrentID) =>
+                                firestore.doc(`write/${ulcurrentID}`).delete()
+                              );
+                          }
+                        }}
+                      >
+                        X
+                      </button>
+                    )}
                   </summary>
                   {writeSelector &&
                     Object.keys(writeSelector)
