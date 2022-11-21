@@ -89,7 +89,7 @@ function WritePage() {
     };
   }, []);
   return (
-    <div className="p-[100px]">
+    <div className="p-[60px]">
       <form onSubmit={onSubmit} className="editor-form">
         <div className="editor-input-container">
           <input
@@ -113,9 +113,10 @@ function WritePage() {
                 .map((item, index) => <option key={index}>{item}</option>)}
           </select>
         </div>
-        <div>
+        <div className="mb-6 border border-2 focus-within:border-black">
           <CustomToolbar />
           <ReactQuill
+            className="w-[720px] h-auto"
             theme="snow"
             ref={quillRef}
             modules={modules}
@@ -126,13 +127,23 @@ function WritePage() {
             }
           />
         </div>
-        <div>
-          <button type="submit" disabled={loading}>
-            Enter
-          </button>
-          <button type="button" onClick={() => navigate("/")}>
-            Close
-          </button>
+        <div className="flex flex-row justify-center items-center">
+          <div className="flex flex-row justify-between items-center">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-[100px] border border-2 border-gray-300 py-0.5 rounded-[5px] mr-5 hover:border-gray-400"
+            >
+              Enter
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate("/")}
+              className="w-[100px] border border-2 border-gray-300 py-0.5 rounded-[5px] hover:border-gray-400"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </form>
     </div>

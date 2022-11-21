@@ -10,6 +10,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Editor */
+
 .editor-form {
   @apply flex flex-col justify-center;
 }
@@ -19,9 +21,15 @@
 }
 
 .editor-input-container input {
-  @apply text-base border border-2 border-gray-300 px-5 py-2.5 w-[400px] focus:border-black mr-5;
+  @apply text-base border border-2 border-gray-300 px-5 py-2 w-[500px] focus:border-black mr-5;
 }
 
 .editor-input-container select {
-  @apply outline-none border border-2 border-gray-300 w-[150px];
+  @apply outline-none border border-2 border-gray-300 w-[200px] py-2 px-2 focus:border-black text-sm;
+}
+
+/* Toolbar */
+
+.toolbar-border {
+  @apply pr-2 mr-2 border border-r-gray-300 border-y-transparent border-l-transparent flex items-center;
 }

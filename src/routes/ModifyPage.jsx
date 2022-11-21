@@ -5,10 +5,12 @@ import {
 } from "react-redux-firebase";
 import { useState, useRef, useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import { useParams, useNavigate } from "react-router-dom";
 import readFileAsync from "../components/readFileAsync";
 import formats from "../components/QuillFormats";
 import ReactQuill, { Quill } from "react-quill";
+import { CustomToolbar } from "../components/CustomToolbar";
 
 function ModifyPage() {
   const [title, setTitle] = useState("");
@@ -65,14 +67,7 @@ function ModifyPage() {
   const modules = useMemo(() => {
     return {
       toolbar: {
-        container: [
-          [{ header: [1, 2, false] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [{ indent: "-1" }, { indent: "+1" }],
-          ["link", "image"],
-          [{ color: [] }, { background: [] }],
-          ["clean"],
-        ],
+        container: "#toolbar",
         handlers: {
           image: imageHandler,
         },
@@ -89,20 +84,22 @@ function ModifyPage() {
     }
   }, [writeSelector, id]);
   return (
-    <>
+    <div className="p-[60px]">
       {writeSelector ? (
-        <form onSubmit={onSubmit}>
-          <div>
-            <div>
-              <input
-                onChange={onChange}
-                value={title || ""}
-                type="text"
-                placeholder="제목"
-                required
-              />
-            </div>
+        <form onSubmit={onSubmit} className="editor-form">
+          <div className="editor-input-container">
+            <input
+              onChange={onChange}
+              value={title || ""}
+              type="text"
+              placeholder="제목"
+              required
+            />
+          </div>
+          <div className="mb-6 border border-2 focus-within:border-black">
+            <CustomToolbar />
             <ReactQuill
+              className="w-[720px] h-auto"
               theme="snow"
               ref={quillRef}
               modules={modules}
@@ -113,19 +110,29 @@ function ModifyPage() {
               }
             />
           </div>
-          <div>
-            <button type="submit" disabled={loading}>
-              Enter
-            </button>
-            <button type="button" onClick={() => navigate("/")}>
-              Close
-            </button>
+          <div className="flex flex-row justify-center items-center">
+            <div className="flex flex-row justify-between items-center">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-[100px] border border-2 border-gray-300 py-0.5 rounded-[5px] mr-5 hover:border-gray-400"
+              >
+                Enter
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className="w-[100px] border border-2 border-gray-300 py-0.5 rounded-[5px] hover:border-gray-400"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </form>
       ) : (
         "Loading..."
       )}
-    </>
+    </div>
   );
 }
 
