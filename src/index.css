@@ -9,3 +9,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.editor-form {
+  @apply flex flex-col justify-center;
+}
+
+.editor-input-container {
+  @apply flex flex-row items-center justify-center mb-5;
+}
+
+.editor-input-container input {
+  @apply text-base border border-2 border-gray-300 px-5 py-2.5 w-[400px] focus:border-black mr-5;
+}
+
+.editor-input-container select {
+  @apply outline-none border border-2 border-gray-300 w-[150px];
+}

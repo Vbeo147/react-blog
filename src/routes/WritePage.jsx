@@ -11,6 +11,7 @@ import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import readFileAsync from "../components/readFileAsync";
 import formats from "../components/QuillFormats";
+import { CustomToolbar } from "../components/CustomToolbar";
 
 function WritePage() {
   const [value, setValue] = useState({ title: "", select: "" });
@@ -77,14 +78,7 @@ function WritePage() {
   const modules = useMemo(() => {
     return {
       toolbar: {
-        container: [
-          [{ header: [1, 2, false] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [{ indent: "-1" }, { indent: "+1" }],
-          ["link", "image"],
-          [{ color: [] }, { background: [] }],
-          ["clean"],
-        ],
+        container: "#toolbar",
         handlers: {
           image: imageHandler,
         },
@@ -95,30 +89,32 @@ function WritePage() {
     };
   }, []);
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className="p-[100px]">
+      <form onSubmit={onSubmit} className="editor-form">
+        <div className="editor-input-container">
+          <input
+            className=""
+            onChange={onChange}
+            value={title || ""}
+            type="text"
+            placeholder="제목"
+            required
+            ref={titleRef}
+          />
+          <select onChange={onChange} required ref={selectRef}>
+            {!select && <option value="">태그를 선택해주세요</option>}
+            {categorySelector &&
+              Object.keys(categorySelector)
+                .filter(
+                  (categoryName) =>
+                    categorySelector[categoryName]?.CheckUndefined !==
+                    (null || undefined)
+                )
+                .map((item, index) => <option key={index}>{item}</option>)}
+          </select>
+        </div>
         <div>
-          <div>
-            <input
-              onChange={onChange}
-              value={title || ""}
-              type="text"
-              placeholder="제목"
-              required
-              ref={titleRef}
-            />
-            <select onChange={onChange} required ref={selectRef}>
-              {!select && <option value="">태그를 선택해주세요</option>}
-              {categorySelector &&
-                Object.keys(categorySelector)
-                  .filter(
-                    (categoryName) =>
-                      categorySelector[categoryName]?.CheckUndefined !==
-                      (null || undefined)
-                  )
-                  .map((item, index) => <option key={index}>{item}</option>)}
-            </select>
-          </div>
+          <CustomToolbar />
           <ReactQuill
             theme="snow"
             ref={quillRef}
