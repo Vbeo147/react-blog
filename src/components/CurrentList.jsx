@@ -36,7 +36,7 @@ function CurrentList({ currentItems }) {
                           날짜
                         </div>
                       </div>
-                      <div className="tracking-tight">
+                      <div className="tracking-tight break-all">
                         {writeSelector[currentID].info.text.slice(0, 80)}
                       </div>
                     </div>
