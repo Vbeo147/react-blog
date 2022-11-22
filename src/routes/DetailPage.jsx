@@ -14,7 +14,7 @@ function DetailPage() {
         <>
           <div
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(writeSelector[id]?.info.text),
+              __html: DOMPurify.sanitize(writeSelector[id]?.info.Quilltext),
             }}
           />
         </>

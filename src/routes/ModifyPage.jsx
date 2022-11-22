@@ -31,9 +31,10 @@ function ModifyPage() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
+    const textReplace = /<[^>]*>?/g;
     setLoading(true);
     await firestore.doc(`write/${id}`).update({
-      info: { title, text: quill },
+      info: { title, Quilltext: quill, text: quill.replace(textReplace, "") },
     });
     setLoading(false);
     navigate("/");
@@ -80,7 +81,7 @@ function ModifyPage() {
   useEffect(() => {
     if (writeSelector) {
       setTitle(writeSelector[id].info.title);
-      setQuill(writeSelector[id].info.text);
+      setQuill(writeSelector[id].info.Quilltext);
     }
   }, [writeSelector, id]);
   return (

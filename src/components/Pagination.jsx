@@ -62,7 +62,7 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
               return (
                 <PaginationBtn
                   background={currentPage === item + 1}
-                  className="border border-2 border-gray-300 mr-2 px-2.5 py-0.5 rounded-[10px] cursor-pointer"
+                  className="border border-2 border-gray-300 mr-2 px-3 py-1 rounded-[10px] cursor-pointer select-none"
                   onClick={() => navigate(`/page/${item + 1}`)}
                   key={index}
                 >

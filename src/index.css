@@ -4,6 +4,12 @@
 @import "./css/scroll-bar.css";
 @import "./css/details.css";
 
+.overflow-hidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* TailwindCSS */
 
 @tailwind base;
