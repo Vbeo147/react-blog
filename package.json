@@ -21,6 +21,7 @@
     "react-router-dom": "^6.4.3",
     "redux": "^4.2.0",
     "redux-firestore": "^1.0.0",
+    "styled-components": "^5.3.6",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

@@ -8,8 +8,8 @@ function CurrentList({ currentItems }) {
   const navigate = useNavigate();
   if (currentItems.length > 0) {
     return (
-      <div>
-        <ul>
+      <>
+        <ul className="flex flex-col items-center justify-center">
           {writeSelector &&
             currentItems
               .filter((id) => writeSelector[id]?.info !== (null || undefined))
@@ -24,7 +24,7 @@ function CurrentList({ currentItems }) {
                 );
               })}
         </ul>
-      </div>
+      </>
     );
   } else {
     return <div>검색결과를 찾을 수 없습니다</div>;

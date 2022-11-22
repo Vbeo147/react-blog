@@ -1,6 +1,16 @@
 import CurrentList from "./CurrentList";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const PaginationBtn = styled.li`
+  border: 3px solid lightgray;
+  border-radius: 10px;
+  margin-right: 5px;
+  padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+  cursor: pointer;
+  background: ${(props) => (props.background ? "lightgray" : "white")};
+`;
 
 function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
   const [currentItems, setCurrentItems] = useState([]);
@@ -49,23 +59,19 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
     <>
       {items && (
         <>
-          <div>
+          <div className="mb-5">
             <CurrentList currentItems={currentItems} />
           </div>
-          <ul>
+          <ul className="flex flex-row items-center justify-center">
             {BtnArr.map((item, index) => {
               return (
-                <li
+                <PaginationBtn
+                  background={currentPage === item + 1}
                   onClick={() => navigate(`/page/${item + 1}`)}
-                  style={{
-                    display: "inline",
-                    marginRight: "8px",
-                    cursor: "pointer",
-                  }}
                   key={index}
                 >
                   {item + 1}
-                </li>
+                </PaginationBtn>
               );
             })}
           </ul>
