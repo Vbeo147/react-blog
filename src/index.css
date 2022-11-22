@@ -28,20 +28,20 @@ h3 {
   @apply flex flex-col justify-center;
 }
 
-.editor-input-container {
+.toolbar-border {
+  @apply pr-2 mr-2 border border-r-gray-300 border-y-transparent border-l-transparent flex items-center;
+}
+
+/* Components */
+
+.components-input-container {
   @apply flex flex-row items-center justify-center mb-5;
 }
 
-.editor-input-container input {
+.components-input-container input {
   @apply text-base border border-2 border-gray-300 px-5 py-2 w-[500px] focus:border-black mr-5;
 }
 
-.editor-input-container select {
+.components-input-container select {
   @apply outline-none border border-2 border-gray-300 w-[200px] py-2 px-2 focus:border-black text-sm;
-}
-
-/* Toolbar */
-
-.toolbar-border {
-  @apply pr-2 mr-2 border border-r-gray-300 border-y-transparent border-l-transparent flex items-center;
 }

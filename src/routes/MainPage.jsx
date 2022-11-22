@@ -33,8 +33,8 @@ function MainPage() {
     setTagSearch(e.target.value);
   };
   return (
-    <>
-      <div>
+    <div className="p-[60px]">
+      <div className="components-input-container">
         <input
           type="text"
           value={tagSearch || ""}
@@ -42,10 +42,17 @@ function MainPage() {
           placeholder="검색할 태그를 입력해주세요"
           id="search_input"
         />
-        <label htmlFor="search_input" onClick={() => setTagSearch("")}>
-          X
+        <label
+          className="border border-2 border-gray-300 px-3 py-2 cursor-pointer mr-5"
+          htmlFor="search_input"
+          onClick={() => setTagSearch("")}
+        >
+          초기화
         </label>
-        <button onClick={() => setSort(!sort)}>
+        <button
+          className="border border-2 border-gray-300 px-3 py-2 cursor-pointer"
+          onClick={() => setSort(!sort)}
+        >
           {sort ? "오래된순" : "최신순"}
         </button>
       </div>
@@ -57,7 +64,7 @@ function MainPage() {
           BtnLimit={BtnLimit}
         />
       </div>
-    </>
+    </div>
   );
 }
 

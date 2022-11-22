@@ -87,7 +87,7 @@ function ModifyPage() {
     <div className="p-[60px]">
       {writeSelector ? (
         <form onSubmit={onSubmit} className="editor-form">
-          <div className="editor-input-container">
+          <div className="components-input-container">
             <input
               onChange={onChange}
               value={title || ""}

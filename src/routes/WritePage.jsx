@@ -91,7 +91,7 @@ function WritePage() {
   return (
     <div className="p-[60px]">
       <form onSubmit={onSubmit} className="editor-form">
-        <div className="editor-input-container">
+        <div className="components-input-container">
           <input
             className=""
             onChange={onChange}
