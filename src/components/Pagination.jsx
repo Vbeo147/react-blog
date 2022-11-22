@@ -4,11 +4,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const PaginationBtn = styled.li`
-  border: 3px solid lightgray;
-  border-radius: 10px;
-  margin-right: 5px;
-  padding: 0.2rem 0.7rem 0.2rem 0.7rem;
-  cursor: pointer;
   background: ${(props) => (props.background ? "lightgray" : "white")};
 `;
 
@@ -67,6 +62,7 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
               return (
                 <PaginationBtn
                   background={currentPage === item + 1}
+                  className="border border-2 border-gray-300 mr-2 px-2.5 py-0.5 rounded-[10px] cursor-pointer"
                   onClick={() => navigate(`/page/${item + 1}`)}
                   key={index}
                 >
