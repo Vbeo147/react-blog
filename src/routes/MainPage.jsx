@@ -43,14 +43,14 @@ function MainPage() {
           id="search_input"
         />
         <label
-          className="border border-2 border-gray-300 px-3 py-2 cursor-pointer mr-5"
+          className="border border-2 border-gray-300 px-3 py-2 cursor-pointer mr-5 select-none"
           htmlFor="search_input"
           onClick={() => setTagSearch("")}
         >
           초기화
         </label>
         <button
-          className="border border-2 border-gray-300 px-3 py-2 cursor-pointer"
+          className="border border-2 border-gray-300 px-3 py-2 cursor-pointer select-none"
           onClick={() => setSort(!sort)}
         >
           {sort ? "오래된순" : "최신순"}

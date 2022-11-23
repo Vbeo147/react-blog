@@ -9,9 +9,9 @@ import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import readFileAsync from "../components/readFileAsync";
-import formats from "../components/QuillFormats";
-import { CustomToolbar } from "../components/CustomToolbar";
+import readFileAsync from "../components/Editor/readFileAsync";
+import formats from "../components/Editor/QuillFormats";
+import { CustomToolbar } from "../components/Editor/CustomToolbar";
 
 function WritePage() {
   const [value, setValue] = useState({ title: "", select: "" });

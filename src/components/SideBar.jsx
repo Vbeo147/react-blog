@@ -1,5 +1,5 @@
-import Auth from "./Auth";
-import Category from "./Category";
+import Auth from "./Sidebar/Auth";
+import Category from "./Sidebar/Category";
 
 function SideBar() {
   return (

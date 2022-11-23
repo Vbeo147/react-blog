@@ -33,7 +33,7 @@ function Category() {
             onSubmit={onSubmit}
           >
             <input
-              className="flex items-center text-sm w-full m-2.5 border border-b-gray-400 border-x-transparent border-t-transparent text-center"
+              className="flex items-center text-sm w-full m-2.5 border border-b-gray-400 border-x-transparent border-t-transparent"
               onChange={onChange}
               value={category}
               type="text"

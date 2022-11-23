@@ -15,6 +15,13 @@ function CurrentList({ currentItems }) {
               .filter((id) => writeSelector[id]?.info !== (null || undefined))
               .map((currentID, index) => {
                 const CurrentItem = writeSelector[currentID];
+                const timestamp = new Intl.DateTimeFormat("ko-KR", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
                 return (
                   <li
                     className="border border-4 border-gray-300 w-[560px] h-[160px] px-8 py-6 flex flex-col justify-start items-start mb-4 select-none hover:border-gray-400 cursor-pointer"
@@ -35,8 +42,8 @@ function CurrentList({ currentItems }) {
                             {CurrentItem.info.title.slice(0, 20)}
                           </span>
                         </div>
-                        <div className="flex flex-row justify-end items-center">
-                          날짜
+                        <div className="flex flex-row justify-end items-center text-xs font-bold opacity-60">
+                          {timestamp.format(CurrentItem.createdAt)}
                         </div>
                       </div>
                       <div className="tracking-tight whitespace-pre-wrap break-all">

@@ -7,10 +7,10 @@ import { useState, useRef, useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { useParams, useNavigate } from "react-router-dom";
-import readFileAsync from "../components/readFileAsync";
-import formats from "../components/QuillFormats";
+import readFileAsync from "../components/Editor/readFileAsync";
+import formats from "../components/Editor/QuillFormats";
 import ReactQuill, { Quill } from "react-quill";
-import { CustomToolbar } from "../components/CustomToolbar";
+import { CustomToolbar } from "../components/Editor/CustomToolbar";
 
 function ModifyPage() {
   const [title, setTitle] = useState("");
