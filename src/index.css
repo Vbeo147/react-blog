@@ -51,3 +51,7 @@ h3 {
 .components-input-container select {
   @apply outline-none border border-2 border-gray-300 w-[200px] py-2 px-2 focus:border-black text-sm;
 }
+
+.components-pagination-btn {
+  @apply border border-2 border-gray-300 px-3 py-1 rounded-[10px] cursor-pointer;
+}
