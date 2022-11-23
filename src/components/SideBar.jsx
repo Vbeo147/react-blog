@@ -1,7 +1,7 @@
 import Auth from "./Auth";
 import Category from "./Category";
 
-function Menu() {
+function SideBar() {
   return (
     <div
       id="menu-scroll"
@@ -17,4 +17,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default SideBar;
