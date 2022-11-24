@@ -38,7 +38,7 @@ h3 {
   @apply pr-2 mr-2 border border-r-gray-300 border-y-transparent border-l-transparent flex items-center;
 }
 
-/* Components */
+/* WritePage and ModifyPage */
 
 .components-input-container {
   @apply flex flex-row items-center justify-center mb-5;
@@ -52,6 +52,26 @@ h3 {
   @apply outline-none border border-2 border-gray-300 w-[200px] py-2 px-2 focus:border-black text-sm;
 }
 
+/* Pagination */
+
 .components-pagination-btn {
   @apply border border-2 border-gray-300 px-3 py-1 rounded-[10px] cursor-pointer;
+}
+
+/* Auth */
+
+.components-auth-btn {
+  @apply mt-5 flex flex-row justify-start items-center py-3 px-3.5;
+}
+
+.components-auth-btn i {
+  @apply text-white text-2xl mr-5;
+}
+
+.components-auth-btn span {
+  @apply text-xl text-white;
+}
+
+.components-auth-btn:hover span {
+  filter: drop-shadow(0 0 0.3rem white);
 }

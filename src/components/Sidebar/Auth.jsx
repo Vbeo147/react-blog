@@ -1,4 +1,11 @@
 import { useFirebase, isLoaded, isEmpty } from "react-redux-firebase";
+import {
+  AiFillHome,
+  BiLogOut,
+  FaQuestionCircle,
+  BsFillPencilFill,
+  BiLogIn,
+} from "react-icons/all";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -16,47 +23,52 @@ function Auth() {
   };
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col justify-center w-[260px]">
+    <div className="flex flex-col justify-center w-full">
       {isLoaded(auth) && !isEmpty(auth) ? (
         <>
-          <h1 className="flex justify-center items-center mb-[10px] text-2xl font-bold opacity-80 tracking-tighter select-none">
-            {auth.displayName}
-          </h1>
-          <button
-            className="text-xl text-white border hover:border-purple-600 rounded-full bg-purple-400 px-2 py-1.5 font-bold"
-            onClick={onLogOut}
-          >
-            Log Out
-          </button>
+          <div className="flex flex-row justify-start items-center px-5 pb-6 border border-b-gray-300 border-t-transparent border-x-transparent">
+            <span className="flex justify-center items-center mb-[10px] text-2xl font-bold tracking-tighter select-none text-gray-300 mr-6">
+              {auth.displayName}
+            </span>
+            <button className="text-white text-3xl" onClick={onLogOut}>
+              <BiLogOut />
+            </button>
+          </div>
         </>
       ) : (
         <>
-          <button
-            className="text-xl text-white border hover:border-purple-600 rounded-full bg-purple-400 px-2 py-1.5 font-bold"
-            onClick={onLogIn}
-          >
-            Continue with Github
+          <button className="components-auth-btn" onClick={onLogIn}>
+            <i>
+              <BiLogIn />
+            </i>
+            <span>Log In</span>
           </button>
         </>
       )}
-      <button
-        className="mt-7 text-lg border border-y-gray-400 border-x-transparent py-[10px] font-bold"
-        onClick={() => navigate("/")}
-      >
-        Home
+      <button className="components-auth-btn" onClick={() => navigate("/")}>
+        <i>
+          <AiFillHome />
+        </i>
+        <span>Home</span>
       </button>
       <button
-        className="mt-7 text-lg border border-y-gray-400 border-x-transparent py-[10px] font-bold"
+        className="components-auth-btn"
         onClick={() => navigate("/about")}
       >
-        About
+        <i>
+          <FaQuestionCircle />
+        </i>
+        <span>About</span>
       </button>
       {auth.uid === import.meta.env.VITE_ADMIN_UID && (
         <button
-          className="mt-7 text-lg border border-y-gray-400 border-x-transparent py-[10px] font-bold"
+          className="components-auth-btn"
           onClick={() => navigate("/write")}
         >
-          글쓰기
+          <i>
+            <BsFillPencilFill />
+          </i>
+          <span>글쓰기</span>
         </button>
       )}
     </div>

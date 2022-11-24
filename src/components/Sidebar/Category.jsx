@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { AiFillTag } from "react-icons/all";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -25,31 +26,28 @@ function Category() {
     setCategory("");
   };
   return (
-    <div className="flex flex-col justify-center items-center mb-10">
+    <div className="flex flex-col justify-center items-center w-full">
       {auth.uid === import.meta.env.VITE_ADMIN_UID && (
-        <div className="mb-7 border border-gray-300 p-10">
+        <div className="mb-12 w-full px-3.5">
           <form
-            className="flex flex-col justify-center items-center"
+            className="flex flex-row justify-start items-center"
             onSubmit={onSubmit}
           >
+            <i className="text-white text-2xl mr-5">
+              <AiFillTag />
+            </i>
             <input
-              className="flex items-center text-sm w-full m-2.5 border border-b-gray-400 border-x-transparent border-t-transparent"
+              className="flex items-center w-full pt-1 pb-1.5 bg-transparent text-white border-x-transparent border-y-transparent border-b-white focus:border"
               onChange={onChange}
               value={category}
               type="text"
               placeholder="추가할 태그를 입력해주세요"
               required
             />
-            <button
-              className="text-xs font-bold border border-gray-400 px-1.5 py-0.5 rounded-[12px]"
-              type="submit"
-            >
-              추가
-            </button>
           </form>
         </div>
       )}
-      <div>
+      <div className="w-full">
         {categorySelector &&
           Object.keys(categorySelector)
             .filter((categoryName) => {
