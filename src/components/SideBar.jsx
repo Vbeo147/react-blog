@@ -1,4 +1,4 @@
-import Auth from "./Sidebar/Auth";
+import OverView from "./Sidebar/OverView";
 import Category from "./Sidebar/Category";
 
 function SideBar() {
@@ -8,7 +8,7 @@ function SideBar() {
       className="fixed flex flex-col items-start w-[340px] h-full overflow-y-scroll bg-[#141514]"
     >
       <div className="mx-auto mt-10 w-full">
-        <Auth />
+        <OverView />
       </div>
       <div className="mx-auto mt-10 w-full">
         <Category />

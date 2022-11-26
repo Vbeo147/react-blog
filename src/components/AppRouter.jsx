@@ -5,6 +5,7 @@ import WritePage from "../routes/WritePage";
 import MainPage from "../routes/MainPage";
 import DetailPage from "../routes/DetailPage";
 import ModifyPage from "../routes/ModifyPage";
+import TagPage from "../routes/TagPage";
 
 function AppRouter() {
   const auth = useSelector((state) => state.firebase.auth);
@@ -15,6 +16,7 @@ function AppRouter() {
         <Route exact path="/page/:page" element={<MainPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/tags" element={<TagPage />} />
         <Route path="*" element={<Navigate to="/" />} />
         {auth.uid === import.meta.env.VITE_ADMIN_UID && (
           <>

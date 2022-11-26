@@ -32,6 +32,10 @@ html {
   font-family: Georgia, serif;
 }
 
+.main-padding {
+  @apply p-[50px];
+}
+
 /* Editor */
 
 .editor-form {
@@ -62,20 +66,20 @@ html {
   @apply border border-2 border-gray-300 px-3 py-1 rounded-[10px] cursor-pointer;
 }
 
-/* Auth */
+/* Overview */
 
-.components-auth-btn {
+.components-overview-btn {
   @apply mt-5 flex flex-row justify-start items-center py-3 px-3.5;
 }
 
-.components-auth-btn i {
+.components-overview-btn i {
   @apply text-white text-2xl mr-5;
 }
 
-.components-auth-btn span {
+.components-overview-btn span {
   @apply text-xl text-white;
 }
 
-.components-auth-btn:hover span {
+.components-overview-btn:hover span {
   filter: drop-shadow(0 0 0.3rem white);
 }

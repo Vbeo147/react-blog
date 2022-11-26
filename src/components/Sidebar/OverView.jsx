@@ -1,6 +1,7 @@
 import { useFirebase, isLoaded, isEmpty } from "react-redux-firebase";
 import {
   AiFillHome,
+  AiFillTag,
   BiLogOut,
   FaQuestionCircle,
   BsFillPencilFill,
@@ -9,7 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function Auth() {
+function OverView() {
   const firebase = useFirebase();
   const auth = useSelector((state) => state.firebase.auth);
   const onLogIn = () => {
@@ -37,7 +38,7 @@ function Auth() {
         </>
       ) : (
         <>
-          <button className="components-auth-btn" onClick={onLogIn}>
+          <button className="components-overview-btn" onClick={onLogIn}>
             <i>
               <BiLogIn />
             </i>
@@ -45,14 +46,14 @@ function Auth() {
           </button>
         </>
       )}
-      <button className="components-auth-btn" onClick={() => navigate("/")}>
+      <button className="components-overview-btn" onClick={() => navigate("/")}>
         <i>
           <AiFillHome />
         </i>
         <span>Home</span>
       </button>
       <button
-        className="components-auth-btn"
+        className="components-overview-btn"
         onClick={() => navigate("/about")}
       >
         <i>
@@ -60,9 +61,18 @@ function Auth() {
         </i>
         <span>About</span>
       </button>
+      <button
+        onClick={() => navigate("/tags")}
+        className="components-overview-btn"
+      >
+        <i>
+          <AiFillTag />
+        </i>
+        <span>Tags</span>
+      </button>
       {auth.uid === import.meta.env.VITE_ADMIN_UID && (
         <button
-          className="components-auth-btn"
+          className="components-overview-btn"
           onClick={() => navigate("/write")}
         >
           <i>
@@ -75,4 +85,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default OverView;

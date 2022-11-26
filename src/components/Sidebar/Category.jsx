@@ -61,7 +61,7 @@ function Category() {
                 <details id="details" key={index}>
                   <summary>
                     <span title={ulCategoryName} className="mr-6">
-                      {ulCategoryName}
+                      {ulCategoryName.slice(0, 17)}
                     </span>
                     {auth.uid === import.meta.env.VITE_ADMIN_UID && (
                       <button
@@ -97,6 +97,12 @@ function Category() {
                         (liID) =>
                           writeSelector[liID]?.categoryName === ulCategoryName
                       )
+                      .sort(function (a, b) {
+                        return (
+                          writeSelector[b].createdAt -
+                          writeSelector[a].createdAt
+                        );
+                      })
                       .map((licurrentID, index) => {
                         return (
                           <div

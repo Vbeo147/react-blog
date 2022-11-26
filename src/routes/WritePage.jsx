@@ -90,7 +90,7 @@ function WritePage() {
     };
   }, []);
   return (
-    <div className="p-[60px]">
+    <div className="main-padding">
       <form onSubmit={onSubmit} className="editor-form">
         <div className="components-input-container">
           <input

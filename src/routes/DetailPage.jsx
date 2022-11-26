@@ -9,7 +9,7 @@ function DetailPage() {
   const writeSelector = useSelector((state) => state.firestore.data.write);
   if (writeSelector) {
     return (
-      <div className="p-[50px] md:w-[800px] 2xl:w-[1200px]">
+      <div className="main-padding md:w-[800px] 2xl:w-[1200px]">
         {writeSelector[id] ? (
           <>
             <div className="flex flex-col justify-start w-full">

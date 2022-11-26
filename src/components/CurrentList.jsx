@@ -31,16 +31,16 @@ function CurrentList({ currentItems }) {
                     <div className="flex flex-col justify-center items-start w-full">
                       <div className="flex flex-row justify-between items-center h-[25px] w-full mb-4 border border-b-gray-400 pb-4 border-x-transparent border-t-transparent">
                         <div className="flex flex-row justify-start items-center">
-                          <span className="font-bold opacity-60 leading-[25px] mr-4 overflow-hidden">{`[ ${CurrentItem.categoryName.slice(
+                          <div className="font-bold opacity-60 leading-[25px] mr-4 overflow-hidden">{`[ ${CurrentItem.categoryName.slice(
                             0,
                             15
-                          )} ]`}</span>
-                          <span
+                          )} ]`}</div>
+                          <div
                             title={CurrentItem.info.title}
-                            className="overflow-hidden w-[220px]"
+                            className="overflow-hidden w-[220px] mr-2"
                           >
-                            {CurrentItem.info.title.slice(0, 20)}
-                          </span>
+                            {CurrentItem.info.title}
+                          </div>
                         </div>
                         <div className="flex flex-row justify-end items-center text-xs font-bold opacity-60">
                           {timestamp.format(CurrentItem.createdAt)}

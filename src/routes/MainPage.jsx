@@ -33,7 +33,7 @@ function MainPage() {
     setTagSearch(e.target.value);
   };
   return (
-    <div className="p-[50px] flex flex-col items-center">
+    <div className="main-padding flex flex-col items-center">
       <div className="components-input-container w-[800px]">
         <input
           type="text"

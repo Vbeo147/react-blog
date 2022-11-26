@@ -58,32 +58,36 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
             <CurrentList currentItems={currentItems} />
           </div>
           <ul className="flex flex-row items-center justify-center">
-            <button
-              disabled={currentPage === 1}
-              className="components-pagination-btn select-none mr-2"
-              onClick={() => navigate(`/page/1`)}
-            >
-              {"<"}
-            </button>
-            {BtnArr.map((item, index) => {
-              return (
-                <PaginationBtn
-                  background={currentPage === item + 1}
-                  className="components-pagination-btn select-none mr-1"
-                  onClick={() => navigate(`/page/${item + 1}`)}
-                  key={index}
+            {items.length !== 0 && (
+              <>
+                <button
+                  disabled={currentPage === 1}
+                  className="components-pagination-btn select-none mr-2"
+                  onClick={() => navigate(`/page/1`)}
                 >
-                  {item + 1}
-                </PaginationBtn>
-              );
-            })}
-            <button
-              disabled={currentPage === pageCount}
-              className="components-pagination-btn select-none ml-2"
-              onClick={() => navigate(`/page/${pageCount}`)}
-            >
-              {">"}
-            </button>
+                  {"<"}
+                </button>
+                {BtnArr.map((item, index) => {
+                  return (
+                    <PaginationBtn
+                      background={currentPage === item + 1}
+                      className="components-pagination-btn select-none mr-1"
+                      onClick={() => navigate(`/page/${item + 1}`)}
+                      key={index}
+                    >
+                      {item + 1}
+                    </PaginationBtn>
+                  );
+                })}
+                <button
+                  disabled={currentPage === pageCount}
+                  className="components-pagination-btn select-none ml-2"
+                  onClick={() => navigate(`/page/${pageCount}`)}
+                >
+                  {">"}
+                </button>
+              </>
+            )}
           </ul>
         </>
       )}

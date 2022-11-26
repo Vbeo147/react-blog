@@ -17,9 +17,7 @@
   align-items: center;
   width: 70%;
   font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-break: break-all;
 }
 
 #details[open] {
