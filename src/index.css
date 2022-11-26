@@ -36,6 +36,10 @@ html {
   @apply p-[50px];
 }
 
+#tag-container:hover span:last-child {
+  text-decoration: underline;
+}
+
 /* Editor */
 
 .editor-form {
