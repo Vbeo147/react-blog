@@ -28,6 +28,10 @@ h3 {
   @apply text-xl;
 }
 
+html {
+  font-family: Georgia, serif;
+}
+
 /* Editor */
 
 .editor-form {

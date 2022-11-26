@@ -31,7 +31,7 @@ function CurrentList({ currentItems }) {
                     <div className="flex flex-col justify-center items-start w-full">
                       <div className="flex flex-row justify-between items-center h-[25px] w-full mb-4 border border-b-gray-400 pb-4 border-x-transparent border-t-transparent">
                         <div className="flex flex-row justify-start items-center">
-                          <span className="text-lg font-bold opacity-60 leading-[25px] mr-4 overflow-hidden">{`[ ${CurrentItem.categoryName.slice(
+                          <span className="font-bold opacity-60 leading-[25px] mr-4 overflow-hidden">{`[ ${CurrentItem.categoryName.slice(
                             0,
                             15
                           )} ]`}</span>

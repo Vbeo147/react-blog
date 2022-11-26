@@ -21,20 +21,20 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
       .fill()
       .map((item, index) => index)
       .slice(startBtnIndex, lastBtnIndex);
-  const SaveStartIndex = items && BtnArr[0];
-  const SaveLastIndex = items && BtnArr[BtnLimit - 1];
   //
   useEffect(() => {
-    const isHome = currentPage < BtnLimit;
+    const isPageHome = currentPage < BtnLimit;
+    const pageInterval = Math.ceil(BtnLimit / (BtnLimit * 2)) + 1;
     if (items) {
       setPageCount(Math.ceil(items.length / itemsPerPage));
-      if (pageCount > BtnLimit && currentPage !== pageCount) {
-        if (SaveStartIndex === currentPage - 1) {
-          setStartBtnIndex((prev) => (isHome ? 0 : prev - BtnLimit));
-        } else if (SaveLastIndex === currentPage - 1) {
-          setStartBtnIndex((prev) => (isHome ? 0 : prev + BtnLimit));
-        }
-      }
+      setStartBtnIndex(
+        isPageHome
+          ? 0
+          : pageCount -
+              pageInterval -
+              (items.length - currentPage * itemsPerPage) -
+              (pageInterval + 1)
+      );
       setLastBtnIndex(
         startBtnIndex + BtnLimit > pageCount
           ? pageCount
@@ -58,6 +58,13 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
             <CurrentList currentItems={currentItems} />
           </div>
           <ul className="flex flex-row items-center justify-center">
+            <button
+              disabled={currentPage === 1}
+              className="components-pagination-btn select-none mr-2"
+              onClick={() => navigate(`/page/1`)}
+            >
+              {"<"}
+            </button>
             {BtnArr.map((item, index) => {
               return (
                 <PaginationBtn
@@ -70,6 +77,13 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
                 </PaginationBtn>
               );
             })}
+            <button
+              disabled={currentPage === pageCount}
+              className="components-pagination-btn select-none ml-2"
+              onClick={() => navigate(`/page/${pageCount}`)}
+            >
+              {">"}
+            </button>
           </ul>
         </>
       )}
