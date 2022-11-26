@@ -65,7 +65,7 @@ function TagPage() {
                     <div
                       onClick={() => navigate(`/detail/${current.id}`)}
                       key={index}
-                      className="flex flex-row justify-start items-center mb-2 cursor-pointer select-none"
+                      className="flex flex-row justify-start items-center mb-5 cursor-pointer select-none"
                       id="tag-container"
                     >
                       <span className="font-bold mr-4">{`[ ${CurrentItem.categoryName} ]`}</span>

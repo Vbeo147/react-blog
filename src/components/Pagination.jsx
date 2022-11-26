@@ -33,7 +33,8 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
           : pageCount -
               pageInterval -
               (items.length - currentPage * itemsPerPage) -
-              (pageInterval + 1)
+              pageInterval +
+              1
       );
       setLastBtnIndex(
         startBtnIndex + BtnLimit > pageCount
@@ -62,10 +63,10 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
               <>
                 <button
                   disabled={currentPage === 1}
-                  className="components-pagination-btn select-none mr-2"
+                  className="components-pagination-btn select-none mr-2 font-bold"
                   onClick={() => navigate(`/page/1`)}
                 >
-                  {"<"}
+                  {currentPage === 1 ? "--" : "<"}
                 </button>
                 {BtnArr.map((item, index) => {
                   return (
@@ -81,10 +82,10 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
                 })}
                 <button
                   disabled={currentPage === pageCount}
-                  className="components-pagination-btn select-none ml-2"
+                  className="components-pagination-btn select-none ml-2 font-bold"
                   onClick={() => navigate(`/page/${pageCount}`)}
                 >
-                  {">"}
+                  {currentPage === pageCount ? "--" : ">"}
                 </button>
               </>
             )}

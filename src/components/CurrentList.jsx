@@ -24,30 +24,30 @@ function CurrentList({ currentItems }) {
                 });
                 return (
                   <li
-                    className="border border-4 border-gray-300 w-[560px] h-[160px] px-8 py-6 flex flex-col justify-start items-start mb-4 select-none hover:border-gray-400 cursor-pointer"
+                    className="border border-4 border-gray-300 w-[640px] h-[160px] px-8 py-6 flex flex-col justify-start items-start mb-4 select-none hover:border-gray-400 cursor-pointer"
                     key={index}
                     onClick={() => navigate(`/detail/${currentID}`)}
                   >
                     <div className="flex flex-col justify-center items-start w-full">
-                      <div className="flex flex-row justify-between items-center h-[25px] w-full mb-4 border border-b-gray-400 pb-4 border-x-transparent border-t-transparent">
+                      <div className="flex flex-row justify-between items-center h-[25px] w-full mb-2 border border-b-gray-400 pb-4 border-x-transparent border-t-transparent">
                         <div className="flex flex-row justify-start items-center">
                           <div className="font-bold opacity-60 leading-[25px] mr-4 overflow-hidden">{`[ ${CurrentItem.categoryName.slice(
                             0,
-                            15
+                            10
                           )} ]`}</div>
                           <div
                             title={CurrentItem.info.title}
-                            className="overflow-hidden w-[220px] mr-2"
+                            className="overflow-hidden w-[200px] mr-2"
                           >
                             {CurrentItem.info.title}
                           </div>
                         </div>
-                        <div className="flex flex-row justify-end items-center text-xs font-bold opacity-60">
+                        <div className="flex flex-row justify-end items-center text-[12px] font-bold opacity-60">
                           {timestamp.format(CurrentItem.createdAt)}
                         </div>
                       </div>
-                      <div className="tracking-tight whitespace-pre-wrap break-all">
-                        {CurrentItem.info.text.slice(0, 80)}
+                      <div className="tracking-tight text-sm w-[560px] h-[80px] overflow">
+                        {CurrentItem.info.text}
                       </div>
                     </div>
                   </li>
