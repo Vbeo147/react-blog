@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 function Category() {
   const [category, setCategory] = useState("");
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const firestore = useFirestore();
   useFirestoreConnect(["categorys", "write"]);
@@ -65,10 +64,8 @@ function Category() {
                     </span>
                     {auth.uid === import.meta.env.VITE_ADMIN_UID && (
                       <button
-                        disabled={loading}
                         className="border border-2 border-gray-400 text-xs rounded-[2px] px-1.5 font-bold"
                         onClick={() => {
-                          setLoading(true);
                           const ok = window.confirm("태그를 삭제합니다.");
                           if (ok) {
                             firestore
@@ -83,7 +80,6 @@ function Category() {
                               .forEach((ulcurrentID) =>
                                 firestore.doc(`write/${ulcurrentID}`).delete()
                               );
-                            setLoading(false);
                           }
                         }}
                       >

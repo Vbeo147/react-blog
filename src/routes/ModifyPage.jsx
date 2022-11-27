@@ -34,6 +34,11 @@ function ModifyPage() {
     const textReplace = /<[^>]*>?/g;
     setLoading(true);
     await firestore.doc(`write/${id}`).update({
+      time: {
+        ...writeSelector[id].time,
+        updatedAt: Date.now(),
+        isUpdate: true,
+      },
       info: { title, Quilltext: quill, text: quill.replace(textReplace, "") },
     });
     setLoading(false);

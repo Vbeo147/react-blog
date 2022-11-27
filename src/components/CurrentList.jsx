@@ -43,7 +43,11 @@ function CurrentList({ currentItems }) {
                           </div>
                         </div>
                         <div className="flex flex-row justify-end items-center text-[12px] font-bold opacity-60">
-                          {timestamp.format(CurrentItem.createdAt)}
+                          {CurrentItem.time.isUpdate
+                            ? `${timestamp.format(
+                                CurrentItem.time.updatedAt
+                              )} (수정됨)`
+                            : timestamp.format(CurrentItem.time.createdAt)}
                         </div>
                       </div>
                       <div className="tracking-tight text-sm w-[560px] h-[80px] overflow">

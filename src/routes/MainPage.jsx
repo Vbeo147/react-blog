@@ -19,8 +19,8 @@ function MainPage() {
         .filter((id) => writeSelector[id]?.info !== (null || undefined))
         .sort(function (a, b) {
           return sort
-            ? writeSelector[a].createdAt - writeSelector[b].createdAt
-            : writeSelector[b].createdAt - writeSelector[a].createdAt;
+            ? writeSelector[a].time.updatedAt - writeSelector[b].time.updatedAt
+            : writeSelector[b].time.updatedAt - writeSelector[a].time.updatedAt;
         })
         .filter((currentID) => {
           return writeSelector[currentID].categoryName

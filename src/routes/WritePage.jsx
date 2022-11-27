@@ -40,10 +40,11 @@ function WritePage() {
   const onSubmit = async (e) => {
     e.preventDefault();
     const textReplace = /<[^>]*>?/g;
+    const today = Date.now();
     setLoading(true);
     await firestore.collection("write").add({
       categoryName: select,
-      createdAt: Date.now(),
+      time: { createdAt: today, updatedAt: today, isUpdate: false },
       info: { title, Quilltext: quill, text: quill.replace(textReplace, "") },
     });
     setValue("");

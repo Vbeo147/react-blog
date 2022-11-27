@@ -1,12 +1,15 @@
-import { useFirestoreConnect } from "react-redux-firebase";
+import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 
 function DetailPage() {
   const { id } = useParams();
   useFirestoreConnect(["write"]);
   const writeSelector = useSelector((state) => state.firestore.data.write);
+  const auth = useSelector((state) => state.firebase.auth);
+  const firestore = useFirestore();
+  const navigate = useNavigate();
   if (writeSelector) {
     const timestamp = new Intl.DateTimeFormat("ko-KR", {
       year: "numeric",
@@ -23,7 +26,7 @@ function DetailPage() {
               {/* first div */}
               <div className="flex justify-center items-center mb-10 border border-2 border-b-gray-400 pb-3 w-full select-none">
                 <div className="flex flex-col justify-center w-full">
-                  <div className="flex flex-row justify-center items-center">
+                  <div className="flex flex-row justify-center items-center mb-2.5">
                     <span className="text-3xl mr-10 overflow-hidden">{`[ ${writeSelector[
                       id
                     ].categoryName.slice(0, 15)} ]`}</span>
@@ -34,8 +37,33 @@ function DetailPage() {
                       {writeSelector[id].info.title.slice(0, 20)}
                     </span>
                   </div>
-                  <div className="flex flex-row justify-end items-center opacity-60">
-                    <span>{timestamp.format(writeSelector[id].createdAt)}</span>
+                  <div className="flex flex-row justify-end items-center text-sm">
+                    <span className="opacity-60 mr-4">{`게시일 : ${timestamp.format(
+                      writeSelector[id].time.createdAt
+                    )}`}</span>
+                    {auth.uid === import.meta.env.VITE_ADMIN_UID && (
+                      <>
+                        <button
+                          onClick={() => navigate(`/modify/${id}`)}
+                          className="border border-2 border-gray-300 px-1 py-0.5 mr-2 rounded-[5px]"
+                        >
+                          Modify
+                        </button>
+                        <button
+                          onClick={async () => {
+                            const ok =
+                              window.confirm("해당 게시글을 삭제합니다");
+                            if (ok) {
+                              await firestore.doc(`write/${id}`).delete();
+                              navigate("/");
+                            }
+                          }}
+                          className="border border-2 border-gray-300 px-1 py-0.5 rounded-[5px]"
+                        >
+                          Delete
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
