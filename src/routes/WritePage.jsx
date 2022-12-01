@@ -61,7 +61,7 @@ function WritePage() {
       async function processFile() {
         try {
           const Url = await readFileAsync(file);
-          // firebase storage putString and getDownloadURL - very inefficient :(
+          // firebase storage putString and getDownloadURL
           let storageUrl = "";
           const storageRef = firebase.storage().ref().child(uuidv4());
           const response = await storageRef.putString(Url, "data_url");

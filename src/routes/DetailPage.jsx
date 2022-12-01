@@ -50,12 +50,12 @@ function DetailPage() {
                           Modify
                         </button>
                         <button
-                          onClick={async () => {
+                          onClick={() => {
                             const ok =
                               window.confirm("해당 게시글을 삭제합니다");
                             if (ok) {
-                              await firestore.doc(`write/${id}`).delete();
                               navigate("/");
+                              firestore.doc(`write/${id}`).delete();
                             }
                           }}
                           className="border border-2 border-gray-300 px-1 py-0.5 rounded-[5px]"
