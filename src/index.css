@@ -14,6 +14,16 @@
   overflow: hidden;
 }
 
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
+.full-page {
+  height: 100vh;
+  width: 100%;
+}
+
 /* TailwindCSS */
 
 @tailwind base;
@@ -90,12 +100,4 @@ html {
 
 .components-overview-btn:hover span {
   filter: drop-shadow(0 0 0.3rem white);
-}
-
-.inner {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 100px;
 }

@@ -13,7 +13,7 @@ function Home() {
           <div>
             <SideBar />
           </div>
-          <div className="pl-[400px]">
+          <div className="pl-[400px] w-full">
             <AppRouter />
           </div>
         </div>

@@ -1,42 +1,39 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 function AboutPage() {
-  const [slide, setSlide] = useState(true);
   const containerRef = useRef(null);
+  const lastPage = 3;
   let page = 0;
   useEffect(() => {
     const onWheel = (e) => {
       e.preventDefault();
       const { deltaY } = e;
-      const lastPage = 3;
-      if (slide) {
-        setSlide(false);
-        if (deltaY < 0 && page !== 0) {
-          page--;
-        }
-        if (deltaY > 0 && page !== lastPage) {
-          page++;
-        }
-        window.scrollTo({
-          top: window.innerHeight * page,
-          behavior: "smooth",
-        });
-        console.log(page);
-        setSlide(true);
+
+      if (deltaY < 0 && page !== 0) {
+        page--;
       }
+      if (deltaY > 0 && page !== lastPage) {
+        page++;
+      }
+      window.scrollTo({
+        top: window.innerHeight * page + 50,
+        behavior: "smooth",
+      });
     };
     const containerRefCurrent = containerRef.current;
     containerRefCurrent.addEventListener("wheel", onWheel);
+    document.body.classList.add("stop-scrolling");
     return () => {
       containerRefCurrent.removeEventListener("wheel", onWheel);
+      document.body.classList.remove("stop-scrolling");
     };
-  }, [slide, page]);
+  }, [page, lastPage]);
   return (
-    <div className="main-padding" ref={containerRef}>
-      <div className="inner">1</div>
-      <div className="inner">2</div>
-      <div className="inner">3</div>
-      <div className="inner">4</div>
+    <div className="pr-10 py-[50px] w-full" ref={containerRef}>
+      <div className="full-page"></div>
+      <div className="full-page bg-blue-300">2</div>
+      <div className="full-page bg-yellow-300">3</div>
+      <div className="full-page bg-green-300">4</div>
     </div>
   );
 }
