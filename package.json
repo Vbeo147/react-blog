@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.1",
     "dompurify": "^2.4.0",
     "firebase": "^9.13.0",
     "quill-image-resize": "^3.0.9",

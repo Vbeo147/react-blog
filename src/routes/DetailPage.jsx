@@ -2,6 +2,7 @@ import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { useEffect } from "react";
 
 function DetailPage() {
   const { id } = useParams();
@@ -10,6 +11,22 @@ function DetailPage() {
   const auth = useSelector((state) => state.firebase.auth);
   const firestore = useFirestore();
   const navigate = useNavigate();
+  useEffect(() => {
+    const el = document.getElementById("title");
+    const onWheel = (e) => {
+      const { deltaY } = e;
+      if (deltaY < 0) {
+        el.classList.remove("hidden-element");
+      }
+      if (deltaY > 0) {
+        el.classList.add("hidden-element");
+      }
+    };
+    window.addEventListener("wheel", onWheel);
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+    };
+  }, []);
   if (writeSelector) {
     const timestamp = new Intl.DateTimeFormat("ko-KR", {
       year: "numeric",
@@ -24,15 +41,18 @@ function DetailPage() {
           <>
             <div className="flex flex-col justify-start w-full">
               {/* first div */}
-              <div className="flex justify-center items-center mb-10 border border-2 border-b-gray-400 pb-3 w-full select-none">
-                <div id="test" className="flex flex-col justify-center w-full">
-                  <div className="flex flex-row justify-center items-center mb-2.5">
-                    <span className="text-3xl mr-10 overflow-hidden">{`[ ${writeSelector[
+              <div
+                id="title"
+                className="flex justify-center items-center mb-10 border border-2 border-b-gray-400 border-x-transparent border-t-transparent pb-3 pt-6 select-none md:w-[800px] 2xl:w-[1200px] bg-white fixed top-0"
+              >
+                <div className="flex flex-col justify-center w-full">
+                  <div className="flex flex-row justify-center items-center">
+                    <span className="text-3xl mr-10">{`[ ${writeSelector[
                       id
                     ].categoryName.slice(0, 15)} ]`}</span>
                     <span
                       title={writeSelector[id].info.title}
-                      className="text-3xl overflow-hidden"
+                      className="text-3xl"
                     >
                       {writeSelector[id].info.title.slice(0, 20)}
                     </span>
@@ -69,7 +89,7 @@ function DetailPage() {
               </div>
               {/* second div */}
               <div
-                className="break-all leading-7 font-mono"
+                className="break-all leading-7 font-mono mt-[8rem]"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(writeSelector[id]?.info.Quilltext),
                 }}
