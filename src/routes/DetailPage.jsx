@@ -12,21 +12,25 @@ function DetailPage() {
   const firestore = useFirestore();
   const navigate = useNavigate();
   useEffect(() => {
-    const el = document.getElementById("title");
-    const onWheel = (e) => {
-      const { deltaY } = e;
-      if (deltaY < 0) {
-        el.classList.remove("hidden-element");
-      }
-      if (deltaY > 0) {
-        el.classList.add("hidden-element");
-      }
-    };
-    window.addEventListener("wheel", onWheel);
-    return () => {
-      window.removeEventListener("wheel", onWheel);
-    };
-  }, []);
+    if (writeSelector) {
+      const el = document.getElementById("title");
+      const onWheel = (e) => {
+        const { deltaY } = e;
+        if (window.innerHeight < document.body.offsetHeight) {
+          if (deltaY < 0) {
+            el.classList.remove("hidden-element");
+          }
+          if (deltaY > 0) {
+            el.classList.add("hidden-element");
+          }
+        }
+      };
+      window.addEventListener("wheel", onWheel);
+      return () => {
+        window.removeEventListener("wheel", onWheel);
+      };
+    }
+  }, [writeSelector]);
   if (writeSelector) {
     const timestamp = new Intl.DateTimeFormat("ko-KR", {
       year: "numeric",
