@@ -1,5 +1,5 @@
 export const CustomToolbar = () => (
-  <div id="toolbar" className="w-[720px] 2xl:w-[1000px]">
+  <div id="toolbar" className="w-full">
     <select
       className="ql-header toolbar-border"
       value=""

@@ -53,15 +53,6 @@ function OverView() {
         <span>Home</span>
       </button>
       <button
-        className="components-overview-btn"
-        onClick={() => navigate("/about")}
-      >
-        <i>
-          <FaQuestionCircle />
-        </i>
-        <span>About</span>
-      </button>
-      <button
         onClick={() => navigate("/tags")}
         className="components-overview-btn"
       >

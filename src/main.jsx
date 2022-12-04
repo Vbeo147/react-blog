@@ -14,8 +14,7 @@ const rrfConfig = {
   useFirestoreForProfile: true,
 };
 
-const initialState = {};
-const store = createStore(rootReducer, initialState);
+const store = createStore(rootReducer);
 
 const rrfProps = {
   firebase,

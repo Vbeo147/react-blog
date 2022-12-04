@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import AboutPage from "../routes/AboutPage";
 import WritePage from "../routes/WritePage";
 import MainPage from "../routes/MainPage";
 import DetailPage from "../routes/DetailPage";
@@ -15,7 +14,6 @@ function AppRouter() {
         <Route exact path="/" element={<MainPage />} />
         <Route exact path="/page/:page" element={<MainPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
-        <Route path="/about" element={<AboutPage />} />
         <Route path="/tags" element={<TagPage />} />
         <Route path="*" element={<Navigate to="/" />} />
         {auth.uid === import.meta.env.VITE_ADMIN_UID && (

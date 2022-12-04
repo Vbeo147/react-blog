@@ -25,7 +25,7 @@ function DetailPage() {
             <div className="flex flex-col justify-start w-full">
               {/* first div */}
               <div className="flex justify-center items-center mb-10 border border-2 border-b-gray-400 pb-3 w-full select-none">
-                <div className="flex flex-col justify-center w-full">
+                <div id="test" className="flex flex-col justify-center w-full">
                   <div className="flex flex-row justify-center items-center mb-2.5">
                     <span className="text-3xl mr-10 overflow-hidden">{`[ ${writeSelector[
                       id

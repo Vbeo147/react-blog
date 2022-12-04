@@ -14,16 +14,6 @@
   overflow: hidden;
 }
 
-.stop-scrolling {
-  height: 100%;
-  overflow: hidden;
-}
-
-.full-page {
-  height: 100vh;
-  width: 100%;
-}
-
 /* TailwindCSS */
 
 @tailwind base;
@@ -50,7 +40,7 @@ html {
   @apply p-[50px];
 }
 
-#tag-container:hover span:last-child {
+#tag-container:hover span {
   text-decoration: underline;
 }
 
@@ -61,7 +51,7 @@ html {
 }
 
 .toolbar-border {
-  @apply pr-2 mr-2 border border-r-gray-300 border-y-transparent border-l-transparent flex items-center;
+  @apply pr-2 mr-2 border border-2 border-r-gray-300 border-y-transparent border-l-transparent flex items-center;
 }
 
 /* WritePage and ModifyPage */

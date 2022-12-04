@@ -17,7 +17,7 @@ function TagPage() {
   const writeSelector = useSelector((state) => state.firestore.data.write);
   const navigate = useNavigate();
   return (
-    <div className="main-padding">
+    <div className="main-padding w-full">
       {writeSelector && (
         <>
           <div className="flex flex-wrap w-[800px] 2xl:w-[1200px] mb-20">
@@ -52,7 +52,7 @@ function TagPage() {
                 );
               })}
           </div>
-          <div className="flex flex-col items-center justify-start">
+          <div className="flex flex-col items-center justify-start w-full">
             {toggle.map((item) =>
               Object.keys(writeSelector)
                 .map((id) => {
@@ -65,12 +65,12 @@ function TagPage() {
                     <div
                       onClick={() => navigate(`/detail/${current.id}`)}
                       key={index}
-                      className="flex flex-row justify-start items-center mb-5 cursor-pointer select-none"
+                      className="flex flex-row justify-start items-center mb-5 cursor-pointer select-none w-full"
                       id="tag-container"
                     >
-                      <span className="font-bold mr-4">{`[ ${CurrentItem.categoryName} ]`}</span>
-                      <span className="w-[600px] overflow-hidden">
-                        {CurrentItem.info.title}
+                      <span className="font-bold w-full">
+                        {`[ ${CurrentItem.categoryName} ]`}
+                        <span className="ml-10">{CurrentItem.info.title}</span>
                       </span>
                     </div>
                   );
