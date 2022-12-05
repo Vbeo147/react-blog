@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import WritePage from "../routes/WritePage";
 import MainPage from "../routes/MainPage";
 import DetailPage from "../routes/DetailPage";
-import ModifyPage from "../routes/ModifyPage";
 import TagPage from "../routes/TagPage";
 
 function AppRouter() {
@@ -19,7 +18,7 @@ function AppRouter() {
         {auth.uid === import.meta.env.VITE_ADMIN_UID && (
           <>
             <Route path="/write" element={<WritePage />} />
-            <Route path="/modify/:id" element={<ModifyPage />} />
+            <Route path="/write/:id" element={<WritePage />} />
           </>
         )}
       </Routes>

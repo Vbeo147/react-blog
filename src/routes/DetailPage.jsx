@@ -68,10 +68,10 @@ function DetailPage() {
                     {auth.uid === import.meta.env.VITE_ADMIN_UID && (
                       <>
                         <button
-                          onClick={() => navigate(`/modify/${id}`)}
+                          onClick={() => navigate(`/write/${id}`)}
                           className="border border-2 border-gray-300 px-1 py-0.5 mr-2 rounded-[5px]"
                         >
-                          Modify
+                          수정
                         </button>
                         <button
                           onClick={() => {
@@ -84,7 +84,7 @@ function DetailPage() {
                           }}
                           className="border border-2 border-gray-300 px-1 py-0.5 rounded-[5px]"
                         >
-                          Delete
+                          삭제
                         </button>
                       </>
                     )}
