@@ -3,12 +3,12 @@ import {
   AiFillHome,
   AiFillTag,
   BiLogOut,
-  FaQuestionCircle,
   BsFillPencilFill,
   BiLogIn,
 } from "react-icons/all";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 
 function OverView() {
   const firebase = useFirebase();
@@ -19,9 +19,9 @@ function OverView() {
       type: "popup",
     });
   };
-  const onLogOut = () => {
+  const onLogOut = useCallback(() => {
     firebase.logout();
-  };
+  }, []);
   const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-center w-full">

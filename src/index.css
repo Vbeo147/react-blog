@@ -25,6 +25,16 @@
   }
 }
 
+pre {
+  background-color: #23241f;
+  border: 5px solid lightgray;
+  border-radius: 0.6rem;
+  padding: 1rem;
+  color: white;
+  overflow: auto;
+  height: 30rem;
+}
+
 /* TailwindCSS */
 
 @tailwind base;

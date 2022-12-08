@@ -1,12 +1,16 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useTransition } from "react";
 import { useParams } from "react-router-dom";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import Pagination from "../components/Pagination";
+import CurrentList from "../components/CurrentList";
 
 function MainPage() {
   const [sort, setSort] = useState(false);
   const [tagSearch, setTagSearch] = useState("");
+  const [currentItems, setCurrentItems] = useState([""]);
+  //
+  const [isPending, tagTransition] = useTransition();
   const { page } = useParams();
   const BtnLimit = 5;
   const itemsPerPage = 5;
@@ -30,7 +34,7 @@ function MainPage() {
     [writeSelector, sort, tagSearch]
   );
   const onChange = (e) => {
-    setTagSearch(e.target.value);
+    tagTransition(() => setTagSearch(e.target.value));
   };
   return (
     <div className="main-padding flex flex-col items-center">
@@ -57,11 +61,15 @@ function MainPage() {
         </button>
       </div>
       <div>
+        <div className="mb-5">
+          <CurrentList currentItems={currentItems} />
+        </div>
         <Pagination
           itemsPerPage={itemsPerPage}
           items={items}
           currentPage={page ? parseInt(page) : 1}
           BtnLimit={BtnLimit}
+          setCurrentItems={setCurrentItems}
         />
       </div>
     </div>

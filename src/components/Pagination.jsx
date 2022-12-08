@@ -1,5 +1,4 @@
-import CurrentList from "./CurrentList";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -7,20 +6,28 @@ const PaginationBtn = styled.li`
   background: ${(props) => (props.background ? "lightgray" : "white")};
 `;
 
-function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
-  const [currentItems, setCurrentItems] = useState([]);
+function Pagination({
+  itemsPerPage,
+  items,
+  currentPage,
+  BtnLimit,
+  setCurrentItems,
+}) {
   const [pageCount, setPageCount] = useState(0);
   const [startBtnIndex, setStartBtnIndex] = useState(
     Math.floor(currentPage / BtnLimit) * BtnLimit
   );
   const [lastBtnIndex, setLastBtnIndex] = useState(BtnLimit);
   const navigate = useNavigate();
-  const BtnArr =
-    items &&
-    new Array(items.length)
-      .fill()
-      .map((item, index) => index)
-      .slice(startBtnIndex, lastBtnIndex);
+  const BtnArr = useMemo(
+    () =>
+      items &&
+      new Array(items.length)
+        .fill()
+        .map((item, index) => index)
+        .slice(startBtnIndex, lastBtnIndex),
+    [items, startBtnIndex, lastBtnIndex]
+  );
   //
   useEffect(() => {
     const isPageHome = currentPage < BtnLimit;
@@ -55,9 +62,6 @@ function Pagination({ itemsPerPage, items, currentPage, BtnLimit }) {
     <>
       {items && (
         <>
-          <div className="mb-5">
-            <CurrentList currentItems={currentItems} />
-          </div>
           <ul className="flex flex-row items-center justify-center">
             {items.length !== 0 && (
               <>

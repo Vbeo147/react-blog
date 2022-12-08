@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useCallback } from "react";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { AiFillTag } from "react-icons/all";
 import { useSelector } from "react-redux";
@@ -14,9 +14,9 @@ function Category() {
   );
   const writeSelector = useSelector((state) => state.firestore.data.write);
   const auth = useSelector((state) => state.firebase.auth);
-  const onChange = (e) => {
+  const onChange = useCallback((e) => {
     setCategory(e.target.value);
-  };
+  }, []);
   const onSubmit = (e) => {
     e.preventDefault();
     firestore.collection("categorys").doc(category).set({
@@ -71,15 +71,6 @@ function Category() {
                             firestore
                               .doc(`categorys/${ulCategoryName}`)
                               .delete();
-                            Object.keys(writeSelector)
-                              .filter(
-                                (ulID) =>
-                                  writeSelector[ulID].categoryName ===
-                                  ulCategoryName
-                              )
-                              .forEach((ulcurrentID) =>
-                                firestore.doc(`write/${ulcurrentID}`).delete()
-                              );
                           }
                         }}
                       >

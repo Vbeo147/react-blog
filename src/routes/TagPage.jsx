@@ -58,22 +58,26 @@ function TagPage() {
                 .map((id) => {
                   return { item: writeSelector[id], id: id };
                 })
-                .filter((Obj) => Obj.item.categoryName === item)
+                .filter((Obj) => Obj.item?.categoryName === item)
                 .map((current, index) => {
                   const CurrentItem = current.item;
-                  return (
-                    <div
-                      onClick={() => navigate(`/detail/${current.id}`)}
-                      key={index}
-                      className="flex flex-row justify-start items-center mb-5 cursor-pointer select-none w-full"
-                      id="tag-container"
-                    >
-                      <span className="font-bold w-full">
-                        {`[ ${CurrentItem.categoryName} ]`}
-                        <span className="ml-10">{CurrentItem.info.title}</span>
-                      </span>
-                    </div>
-                  );
+                  if (CurrentItem.categoryName) {
+                    return (
+                      <div
+                        onClick={() => navigate(`/detail/${current.id}`)}
+                        key={index}
+                        className="flex flex-row justify-start items-center mb-5 cursor-pointer select-none w-full"
+                        id="tag-container"
+                      >
+                        <span className="font-bold w-full">
+                          {`[ ${CurrentItem.categoryName} ]`}
+                          <span className="ml-10">
+                            {CurrentItem.info.title}
+                          </span>
+                        </span>
+                      </div>
+                    );
+                  }
                 })
             )}
           </div>

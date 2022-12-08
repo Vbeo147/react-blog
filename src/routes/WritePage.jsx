@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import {
   useFirebase,
   useFirestore,
@@ -30,15 +30,15 @@ function WritePage() {
     (state) => state.firestore.data.categorys
   );
   const writeSelector = useSelector((state) => state.firestore.data.write);
-  const onTitleChange = (e) => {
+  const onTitleChange = useCallback((e) => {
     setTitle(e.target.value);
-  };
-  const onSelectChange = (e) => {
+  }, []);
+  const onSelectChange = useCallback((e) => {
     setSelect(e.target.value);
-  };
-  const onQuillChange = (html) => {
+  }, []);
+  const onQuillChange = useCallback((html) => {
     setQuill(html);
-  };
+  }, []);
   const onSubmit = async (e) => {
     e.preventDefault();
     const textReplace = /<[^>]*>?/g;
@@ -146,6 +146,7 @@ function WritePage() {
             <div className="mb-6 border border-2 focus-within:border-black">
               <CustomToolbar />
               <ReactQuill
+                id="editor"
                 className="w-full h-auto"
                 spellCheck="false"
                 theme="snow"
