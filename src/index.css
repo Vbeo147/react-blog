@@ -1,8 +1,10 @@
 /* CSS */
 
-@import "./css//reset.css";
+@import "./css/reset.css";
 @import "./css/scroll-bar.css";
 @import "./css/details.css";
+@import "./css/sidebar.css";
+@import "./css/mainpage.css";
 
 .overflow-hidden {
   overflow: hidden;
@@ -26,13 +28,12 @@
 }
 
 pre {
-  background-color: #23241f;
-  border: 5px solid lightgray;
+  background-color: lightgray;
+  border: 5px solid gray;
   border-radius: 0.6rem;
   padding: 1rem;
-  color: white;
+  color: #23241f;
   overflow: auto;
-  height: 30rem;
 }
 
 /* TailwindCSS */
@@ -63,52 +64,4 @@ html {
 
 #tag-container:hover span {
   text-decoration: underline;
-}
-
-/* Editor */
-
-.editor-form {
-  @apply flex flex-col justify-center;
-}
-
-.toolbar-border {
-  @apply pr-2 mr-2 border border-2 border-r-gray-300 border-y-transparent border-l-transparent flex items-center;
-}
-
-/* WritePage and ModifyPage */
-
-.components-input-container {
-  @apply flex flex-row items-center justify-center mb-5;
-}
-
-.components-input-container input {
-  @apply text-base border border-2 border-gray-300 px-5 py-2 w-[500px] focus:border-black mr-5;
-}
-
-.components-input-container select {
-  @apply outline-none border border-2 border-gray-300 w-[200px] py-2 px-2 focus:border-black text-sm;
-}
-
-/* Pagination */
-
-.components-pagination-btn {
-  @apply border border-2 border-gray-300 px-3 py-1 rounded-[10px] cursor-pointer;
-}
-
-/* Overview */
-
-.components-overview-btn {
-  @apply mt-5 flex flex-row justify-start items-center py-3 px-3.5;
-}
-
-.components-overview-btn i {
-  @apply text-white text-2xl mr-5;
-}
-
-.components-overview-btn span {
-  @apply text-xl text-white;
-}
-
-.components-overview-btn:hover span {
-  filter: drop-shadow(0 0 0.3rem white);
 }

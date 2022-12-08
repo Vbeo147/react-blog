@@ -28,6 +28,9 @@ function Pagination({
         .slice(startBtnIndex, lastBtnIndex),
     [items, startBtnIndex, lastBtnIndex]
   );
+  const onPageChange = (page) => {
+    navigate(`/page/${page}`);
+  };
   //
   useEffect(() => {
     const isPageHome = currentPage < BtnLimit;
@@ -57,6 +60,9 @@ function Pagination({
       setCurrentItems(items.slice(itemOffset, endOffset));
     }
   }, [currentPage, items]);
+  useEffect(() => {
+    localStorage.setItem("page", currentPage);
+  }, [currentPage]);
   //
   return (
     <>
@@ -68,7 +74,7 @@ function Pagination({
                 <button
                   disabled={currentPage === 1}
                   className="components-pagination-btn select-none mr-2 font-bold"
-                  onClick={() => navigate(`/page/1`)}
+                  onClick={() => onPageChange(1)}
                 >
                   {currentPage === 1 ? "--" : "<"}
                 </button>
@@ -77,7 +83,7 @@ function Pagination({
                     <PaginationBtn
                       background={currentPage === item + 1}
                       className="components-pagination-btn select-none mr-1"
-                      onClick={() => navigate(`/page/${item + 1}`)}
+                      onClick={() => onPageChange(item + 1)}
                       key={index}
                     >
                       {item + 1}
@@ -87,7 +93,7 @@ function Pagination({
                 <button
                   disabled={currentPage === pageCount}
                   className="components-pagination-btn select-none ml-2 font-bold"
-                  onClick={() => navigate(`/page/${pageCount}`)}
+                  onClick={() => onPageChange(pageCount)}
                 >
                   {currentPage === pageCount ? "--" : ">"}
                 </button>

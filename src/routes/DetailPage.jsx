@@ -67,11 +67,20 @@ function DetailPage() {
                     <span className="opacity-60 mr-4">{`게시일 : ${timestamp.format(
                       writeSelector[id].time.createdAt
                     )}`}</span>
+                    <button
+                      onClick={() => {
+                        const beforepage = localStorage.getItem("page");
+                        navigate(`/page/${beforepage}`);
+                      }}
+                      className="components-fixed-btn mr-2"
+                    >
+                      이전 페이지
+                    </button>
                     {auth.uid === import.meta.env.VITE_ADMIN_UID && (
                       <>
                         <button
                           onClick={() => navigate(`/write/${id}`)}
-                          className="border border-2 border-gray-300 px-1 py-0.5 mr-2 rounded-[5px]"
+                          className="components-fixed-btn mr-2"
                         >
                           수정
                         </button>
@@ -84,7 +93,7 @@ function DetailPage() {
                               firestore.doc(`write/${id}`).delete();
                             }
                           }}
-                          className="border border-2 border-gray-300 px-1 py-0.5 rounded-[5px]"
+                          className="components-fixed-btn"
                         >
                           삭제
                         </button>

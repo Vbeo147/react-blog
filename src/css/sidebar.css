@@ -1,0 +1,15 @@
+.components-overview-btn {
+  @apply mt-5 flex flex-row justify-start items-center py-3 px-3.5;
+}
+
+.components-overview-btn i {
+  @apply text-white text-2xl mr-5;
+}
+
+.components-overview-btn span {
+  @apply text-xl text-white;
+}
+
+.components-overview-btn:hover span {
+  filter: drop-shadow(0 0 0.3rem white);
+}
