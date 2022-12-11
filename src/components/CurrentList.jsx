@@ -61,7 +61,7 @@ function CurrentList({ currentItems }) {
       </>
     );
   } else if (isLoading) {
-    return <div>게시글 정보를 받아오는 중...</div>;
+    return <div>게시글이 없습니다</div>;
   } else {
     return <div>검색결과를 찾을 수 없습니다</div>;
   }

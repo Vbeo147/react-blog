@@ -85,12 +85,12 @@ function DetailPage() {
                           수정
                         </button>
                         <button
-                          onClick={() => {
+                          onClick={async () => {
                             const ok =
                               window.confirm("해당 게시글을 삭제합니다");
                             if (ok) {
+                              await firestore.doc(`write/${id}`).delete();
                               navigate("/");
-                              firestore.doc(`write/${id}`).delete();
                             }
                           }}
                           className="components-fixed-btn"

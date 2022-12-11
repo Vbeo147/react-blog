@@ -15,14 +15,13 @@ function TagPage() {
     (state) => state.firestore.data.categorys
   );
   const writeSelector = useSelector((state) => state.firestore.data.write);
-  const isSelectors = categorySelector && writeSelector;
   const navigate = useNavigate();
   return (
     <>
-      {isSelectors && (
-        <>
-          <div className="main-padding w-full">
-            <div className="flex flex-wrap w-[800px] 2xl:w-[1200px] mb-20">
+      <div className="main-padding w-full">
+        <div className="flex flex-wrap w-[800px] 2xl:w-[1200px] mb-20">
+          {categorySelector && (
+            <>
               {Object.keys(categorySelector)
                 .filter((categoryName) => {
                   return (
@@ -53,8 +52,12 @@ function TagPage() {
                     </ToggleBtn>
                   );
                 })}
-            </div>
-            <div className="flex flex-col items-center justify-start w-full">
+            </>
+          )}
+        </div>
+        <div className="flex flex-col items-center justify-start w-full">
+          {writeSelector && (
+            <>
               {toggle.map((item) =>
                 Object.keys(writeSelector)
                   .map((id) => {
@@ -82,10 +85,10 @@ function TagPage() {
                     }
                   })
               )}
-            </div>
-          </div>
-        </>
-      )}
+            </>
+          )}
+        </div>
+      </div>
     </>
   );
 }
