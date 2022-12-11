@@ -25,11 +25,13 @@ const rrfProps = {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-    <ReactReduxFirebaseProvider {...rrfProps}>
-      <BrowserRouter basename="/react-blog/">
-        <Home />
-      </BrowserRouter>
-    </ReactReduxFirebaseProvider>
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <BrowserRouter basename="/react-blog/">
+          <Home />
+        </BrowserRouter>
+      </ReactReduxFirebaseProvider>
+    </Provider>
+  </React.StrictMode>
 );
