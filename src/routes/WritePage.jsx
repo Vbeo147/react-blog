@@ -30,6 +30,7 @@ function WritePage() {
     (state) => state.firestore.data.categorys
   );
   const writeSelector = useSelector((state) => state.firestore.data.write);
+  const isWrite = writeSelector && writeSelector[id];
   const onTitleChange = useCallback((e) => {
     setTitle(e.target.value);
   }, []);
@@ -44,7 +45,7 @@ function WritePage() {
     const textReplace = /<[^>]*>?/g;
     const today = Date.now();
     setLoading(true);
-    if (writeSelector[id]) {
+    if (isWrite) {
       await firestore.doc(`write/${id}`).update({
         time: {
           ...writeSelector[id].time,
@@ -107,83 +108,77 @@ function WritePage() {
     quillRef.current?.editor.root.setAttribute("spellcheck", "false");
   }, []);
   useEffect(() => {
-    if (writeSelector && writeSelector[id]) {
+    if (isWrite) {
       setTitle(writeSelector[id].info.title);
       setQuill(writeSelector[id].info.Quilltext);
     }
   }, [writeSelector, id]);
   return (
-    <>
-      {writeSelector && (
-        <div className="main-padding">
-          <form onSubmit={onSubmit} className="editor-form">
-            <div className="components-input-container">
-              <input
-                spellCheck="false"
-                className=""
-                onChange={onTitleChange}
-                value={title || ""}
-                type="text"
-                placeholder="제목"
-                required
-              />
-              {!writeSelector[id] && (
-                <select onChange={onSelectChange} required>
-                  {!select && <option value="">태그를 선택해주세요</option>}
-                  {categorySelector &&
-                    Object.keys(categorySelector)
-                      .filter(
-                        (categoryName) =>
-                          categorySelector[categoryName]?.CheckUndefined !==
-                          (null || undefined)
-                      )
-                      .map((item, index) => (
-                        <option key={index}>{item}</option>
-                      ))}
-                </select>
-              )}
-            </div>
-            <div className="mb-6 border border-2 focus-within:border-black">
-              <CustomToolbar />
-              <ReactQuill
-                id="editor"
-                className="w-full h-auto"
-                spellCheck="false"
-                theme="snow"
-                ref={quillRef}
-                modules={modules}
-                formats={formats}
-                value={quill || ""}
-                onChange={(content, delta, source, editor) =>
-                  onQuillChange(editor.getHTML())
-                }
-              />
-            </div>
-            <div className="flex flex-row justify-center items-center">
-              <div className="flex flex-row justify-between items-center">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-[100px] border border-2 border-gray-300 py-0.5 rounded-[5px] mr-5 hover:border-gray-400"
-                >
-                  Enter
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const beforepage = localStorage.getItem("page");
-                    navigate(`/page/${beforepage}`);
-                  }}
-                  className="w-[100px] border border-2 border-gray-300 py-0.5 rounded-[5px] hover:border-gray-400"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </form>
+    <div className="main-padding">
+      <form onSubmit={onSubmit} className="editor-form">
+        <div className="components-input-container">
+          <input
+            spellCheck="false"
+            className=""
+            onChange={onTitleChange}
+            value={title || ""}
+            type="text"
+            placeholder="제목"
+            required
+          />
+          {!isWrite && (
+            <select onChange={onSelectChange} required>
+              {!select && <option value="">태그를 선택해주세요</option>}
+              {categorySelector &&
+                Object.keys(categorySelector)
+                  .filter(
+                    (categoryName) =>
+                      categorySelector[categoryName]?.CheckUndefined !==
+                      (null || undefined)
+                  )
+                  .map((item, index) => <option key={index}>{item}</option>)}
+            </select>
+          )}
         </div>
-      )}
-    </>
+        <div className="mb-6 border border-2 focus-within:border-black">
+          <CustomToolbar />
+          <ReactQuill
+            id="editor"
+            className="w-full h-auto"
+            spellCheck="false"
+            theme="snow"
+            ref={quillRef}
+            modules={modules}
+            formats={formats}
+            value={quill || ""}
+            onChange={(content, delta, source, editor) =>
+              onQuillChange(editor.getHTML())
+            }
+          />
+        </div>
+        <div className="flex flex-row justify-center items-center">
+          <div className="flex flex-row justify-between items-center">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-[100px] border border-2 border-gray-300 py-0.5 rounded-[5px] mr-5 hover:border-gray-400"
+            >
+              Enter
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                const beforepage = localStorage.getItem("page");
+                navigate(`/page/${beforepage}`);
+              }}
+              className="w-[100px] border border-2 border-gray-300 py-0.5 rounded-[5px] hover:border-gray-400"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 }
 
