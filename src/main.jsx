@@ -28,9 +28,7 @@ root.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
       <BrowserRouter basename="/react-blog/">
-        <React.StrictMode>
-          <Home />
-        </React.StrictMode>
+        <Home />
       </BrowserRouter>
     </ReactReduxFirebaseProvider>
   </Provider>
