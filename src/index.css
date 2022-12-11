@@ -34,6 +34,8 @@ pre {
   padding: 1rem;
   color: #23241f;
   overflow: auto;
+  height: 44rem;
+  width: 100%;
 }
 
 /* TailwindCSS */

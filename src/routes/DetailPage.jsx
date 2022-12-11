@@ -49,7 +49,7 @@ function DetailPage() {
               {/* first div */}
               <div
                 id="title"
-                className="flex justify-center items-center mb-10 border border-2 border-b-gray-400 border-x-transparent border-t-transparent pb-3 pt-6 select-none md:w-[800px] 2xl:w-[1200px] bg-white fixed top-0"
+                className="flex justify-center items-center mb-10 border border-2 border-b-gray-400 border-x-transparent border-t-transparent pb-1 pt-6 select-none md:w-[800px] 2xl:w-[1200px] bg-white fixed top-0"
               >
                 <div className="flex flex-col justify-center w-full">
                   <div className="flex flex-row justify-center items-center">

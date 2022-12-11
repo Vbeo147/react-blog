@@ -170,7 +170,10 @@ function WritePage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => navigate("/")}
+                  onClick={() => {
+                    const beforepage = localStorage.getItem("page");
+                    navigate(`/page/${beforepage}`);
+                  }}
                   className="w-[100px] border border-2 border-gray-300 py-0.5 rounded-[5px] hover:border-gray-400"
                 >
                   Close

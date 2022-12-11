@@ -13,23 +13,28 @@ import { useCallback } from "react";
 function OverView() {
   const firebase = useFirebase();
   const auth = useSelector((state) => state.firebase.auth);
+  const navigate = useNavigate();
   const onLogIn = () => {
     firebase.login({
-      provider: "google",
+      provider: "github",
       type: "popup",
     });
   };
   const onLogOut = useCallback(() => {
     firebase.logout();
+    navigate("/");
   }, []);
-  const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-center w-full">
       {isLoaded(auth) && !isEmpty(auth) ? (
         <>
           <div className="flex flex-row justify-start items-center px-5 pb-6 border border-b-gray-300 border-t-transparent border-x-transparent">
             <span className="flex justify-center items-center mb-[10px] text-2xl font-bold tracking-tighter select-none text-gray-300 mr-6">
-              {auth.displayName}
+              <img
+                className="w-[50px] h-[50px] rounded-[8px]"
+                src={auth.photoURL}
+                alt=""
+              />
             </span>
             <button className="text-white text-3xl" onClick={onLogOut}>
               <BiLogOut />
