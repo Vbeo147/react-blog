@@ -23,12 +23,11 @@ const rrfProps = {
   createFirestoreInstance,
 };
 
-console.log(process.env.PUBLIC_URL);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename="/react-blog/">
         <Home />
       </BrowserRouter>
     </ReactReduxFirebaseProvider>
