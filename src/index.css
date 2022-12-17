@@ -33,9 +33,27 @@ pre {
   border-radius: 0.6rem;
   padding: 1rem;
   color: #23241f;
-  overflow: auto;
-  height: 44rem;
+  height: auto;
   width: 100%;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+.detail-current-container pre {
+  background-color: lightgray;
+  border: 5px solid gray;
+  border-radius: 0.6rem;
+  padding: 1rem;
+  color: #23241f;
+  height: 35rem;
+  width: 100%;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+pre:hover,
+.detail-current-container pre:hover {
+  overflow: auto;
 }
 
 /* TailwindCSS */

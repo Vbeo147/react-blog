@@ -2,7 +2,6 @@ import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
-import { useEffect, useRef } from "react";
 
 function DetailPage() {
   const { id } = useParams();
@@ -11,28 +10,6 @@ function DetailPage() {
   const auth = useSelector((state) => state.firebase.auth);
   const firestore = useFirestore();
   const navigate = useNavigate();
-  const htmlRef = useRef();
-  useEffect(() => {
-    if (writeSelector) {
-      const el = document.getElementById("title");
-      const currentRef = htmlRef.current;
-      const onWheel = (e) => {
-        const { deltaY } = e;
-        if (window.innerHeight < document.body.offsetHeight) {
-          if (deltaY < 0) {
-            el.classList.remove("hidden-element");
-          }
-          if (deltaY > 0) {
-            el.classList.add("hidden-element");
-          }
-        }
-      };
-      currentRef.addEventListener("wheel", onWheel);
-      return () => {
-        currentRef.removeEventListener("wheel", onWheel);
-      };
-    }
-  }, [writeSelector]);
   if (writeSelector) {
     const timestamp = new Intl.DateTimeFormat("ko-KR", {
       year: "numeric",
@@ -104,8 +81,7 @@ function DetailPage() {
               </div>
               {/* second div */}
               <div
-                ref={htmlRef}
-                className="break-all leading-7 font-mono mt-[8rem]"
+                className="break-all leading-7 font-mono mt-[8rem] detail-current-container"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(writeSelector[id]?.info.Quilltext),
                 }}
